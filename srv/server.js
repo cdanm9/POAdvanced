@@ -1,6 +1,28 @@
 const cds = require("@sap/cds");
-const cov2ap = require("@sap/cds-odata-v2-adapter-proxy");
-cds.on("bootstrap", (app) => app.use(cov2ap()));
+// const cov2ap = require("@sap/cds-odata-v2-adapter-proxy");
+// cds.on("bootstrap", (app) => {
+//     app.use(cov2ap());          
+// });
+cds.on('serving', service => {
+    addLinkToGraphQl(service)        
+})
+
+function addLinkToGraphQl(service) {
+    const provider = (entity) => {
+        if (entity) return // avoid link on entity level, looks too messy
+        let isGraphQL
+        for (const endpoint of service.endpoints) {
+            if(endpoint && endpoint.kind === 'graphql'){
+                isGraphQL = true
+            }
+        }
+        if(isGraphQL){
+            return { href: 'graphql', name: 'GraphQl', title: 'Show in GraphQL' }
+        }     
+    }
+    // Needs @sap/cds >= 4.4.0
+    service.$linkProviders ? service.$linkProviders.push(provider) : service.$linkProviders = [provider]
+}
 module.exports = cds.server;  
 
 

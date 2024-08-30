@@ -14,6 +14,8 @@ modules:
     type: nodejs
     path: gen/srv
     parameters:
+      memory: 750M
+      disk-quota: 750M
       buildpack: nodejs_buildpack
     build-parameters:
       builder: npm
@@ -24,11 +26,15 @@ modules:
     requires:
       - name: PurchaseOrderAdvanced-db
       - name: PurchaseOrderAdvanced-auth
+      - name: PurchaseOrderAdvanced-destination
+      - name: PurchaseOrderAdvanced-connectivity
 
   - name: PurchaseOrderAdvanced-db-deployer
     type: hdb
     path: gen/db
     parameters:
+      memory: 750M
+      disk-quota: 750M
       buildpack: nodejs_buildpack
     requires:
       - name: PurchaseOrderAdvanced-db
@@ -48,6 +54,7 @@ modules:
           url: ~{srv-url}
           forwardAuthToken: true
       - name: PurchaseOrderAdvanced-auth
+      - name: PurchaseOrderAdvanced-destination
 
 resources:
   - name: PurchaseOrderAdvanced-db
@@ -65,3 +72,13 @@ resources:
         xsappname: PurchaseOrderAdvanced-${org}-${space}
         # xsappname: PurchaseOrderAdvanced-xsapp
         tenant-mode: dedicated
+  - name: PurchaseOrderAdvanced-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+  - name: PurchaseOrderAdvanced-connectivity
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: connectivity
+      service-plan: lite

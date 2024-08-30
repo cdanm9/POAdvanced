@@ -1,0 +1,651 @@
+@server = http://localhost:4004
+@auth = Authorization: Basic alice:
+
+
+### POHeader
+# @name POHeader_GET
+GET {{server}}/odata/v4/pocreation/POHeader
+{{auth}}
+
+
+### POHeader Drafts GET
+# @name POHeader_Drafts_GET
+GET {{server}}/odata/v4/pocreation/POHeader?$filter=(IsActiveEntity eq false)
+{{auth}}
+
+
+### POHeader Draft POST
+# @name POHeader_Draft_POST
+POST {{server}}/odata/v4/pocreation/POHeader
+Content-Type: application/json
+{{auth}}
+
+{
+  "PO_Number": 14,
+  "CreationDate": "2018-09-21",
+  "DeliveryDate": "2023-11-29",
+  "Status": 30,
+  "MadeBy": "MadeBy-8877013",
+  "PCode": "PCode-8877013",
+  "CompanyCode": "CompanyCode-8877013",
+  "Delete": "3",
+  "Criticality": 40,
+  "Total_Amount": 63.16,
+  "Pl_Master": {
+    "CODE": "PlantMaster-4285961"
+  },
+  "Cp_Master": {
+    "CODE": "ompanyMaster-2942221"
+  },
+  "S_Master": {
+    "CODE": 13284878
+  },
+  "PO_Item_Master": [
+    {
+      "ID": "591565e5-6e7b-47cb-95ca-285c8b89f5c8",
+      "PO_Number": 76,
+      "PO_Item_Num": 90,
+      "MCode": "MCode-591565",
+      "Quantity": 94,
+      "Amount": 90.19,
+      "M_Master": {
+        "CODE": "rial_Master-15934961"
+      }
+    },
+    {
+      "ID": "5915666a-f017-4d4a-adad-0cdd85066547",
+      "PO_Number": 55,
+      "PO_Item_Num": 85,
+      "MCode": "MCode-591566",
+      "Quantity": 21,
+      "Amount": 24.18,
+      "M_Master": {
+        "CODE": "rial_Master-15934961"
+      }
+    }
+  ],
+  "PO_Attach_Master": [
+    {
+      "ID": "28195878-ca89-4919-96c0-c018e20ad429",
+      "PO_Number": 69,
+      "File_Type": "File_Type-28195878",
+      "FileName": "FileName-28195878",
+      "createdAt": "2014-05-08T00:00:00.000Z",
+      "createdBy": "createdBy.gsc2u@example.com",
+      "modifiedAt": "2010-03-04T00:00:00.000Z",
+      "modifiedBy": "modifiedBy.gsc2u@example.com"
+    },
+    {
+      "ID": "28195879-b802-4e55-94a3-8370a7051cec",
+      "PO_Number": 41,
+      "File_Type": "File_Type-28195879",
+      "FileName": "FileName-28195879",
+      "createdAt": "2000-04-21T00:00:00.000Z",
+      "createdBy": "createdBy.gsc2v@example.net",
+      "modifiedAt": "2010-09-16T00:00:00.000Z",
+      "modifiedBy": "modifiedBy.gsc2v@example.org"
+    }
+  ],
+  "createdAt": "2022-12-03T00:00:00.000Z",
+  "createdBy": "createdBy.5a9jp@example.com",
+  "modifiedAt": "2014-07-19T00:00:00.000Z",
+  "modifiedBy": "modifiedBy.5a9jp@example.com"
+}
+
+
+### Result from POST request above
+@draftID = {{POHeader_Draft_POST.response.body.$.ID}}
+
+
+### POHeader Draft PATCH
+# @name POHeader_Draft_Patch
+PATCH {{server}}/odata/v4/pocreation/POHeader(ID={{draftID}},IsActiveEntity=false)
+Content-Type: application/json
+{{auth}}
+
+{
+  "PO_Number": 14,
+  "CreationDate": "2018-09-21",
+  "DeliveryDate": "2023-11-29",
+  "Status": 30,
+  "MadeBy": "MadeBy-8877013",
+  "PCode": "PCode-8877013",
+  "CompanyCode": "CompanyCode-8877013",
+  "Delete": "3",
+  "Criticality": 40,
+  "Total_Amount": 63.16,
+  "Pl_Master": {
+    "CODE": "PlantMaster-4285961"
+  },
+  "Cp_Master": {
+    "CODE": "ompanyMaster-2942221"
+  },
+  "S_Master": {
+    "CODE": 13284878
+  },
+  "PO_Item_Master": [
+    {
+      "ID": "591565e5-6e7b-47cb-95ca-285c8b89f5c8",
+      "PO_Number": 76,
+      "PO_Item_Num": 90,
+      "MCode": "MCode-591565",
+      "Quantity": 94,
+      "Amount": 90.19,
+      "M_Master": {
+        "CODE": "rial_Master-15934961"
+      }
+    },
+    {
+      "ID": "5915666a-f017-4d4a-adad-0cdd85066547",
+      "PO_Number": 55,
+      "PO_Item_Num": 85,
+      "MCode": "MCode-591566",
+      "Quantity": 21,
+      "Amount": 24.18,
+      "M_Master": {
+        "CODE": "rial_Master-15934961"
+      }
+    }
+  ],
+  "PO_Attach_Master": [
+    {
+      "ID": "28195878-ca89-4919-96c0-c018e20ad429",
+      "PO_Number": 69,
+      "File_Type": "File_Type-28195878",
+      "FileName": "FileName-28195878",
+      "createdAt": "2014-05-08T00:00:00.000Z",
+      "createdBy": "createdBy.gsc2u@example.com",
+      "modifiedAt": "2010-03-04T00:00:00.000Z",
+      "modifiedBy": "modifiedBy.gsc2u@example.com"
+    },
+    {
+      "ID": "28195879-b802-4e55-94a3-8370a7051cec",
+      "PO_Number": 41,
+      "File_Type": "File_Type-28195879",
+      "FileName": "FileName-28195879",
+      "createdAt": "2000-04-21T00:00:00.000Z",
+      "createdBy": "createdBy.gsc2v@example.net",
+      "modifiedAt": "2010-09-16T00:00:00.000Z",
+      "modifiedBy": "modifiedBy.gsc2v@example.org"
+    }
+  ],
+  "createdAt": "2022-12-03T00:00:00.000Z",
+  "createdBy": "createdBy.5a9jp@example.com",
+  "modifiedAt": "2014-07-19T00:00:00.000Z",
+  "modifiedBy": "modifiedBy.5a9jp@example.com"
+}
+
+
+### POHeader Draft Prepare
+# @name POHeader_Draft_Prepare
+POST {{server}}/odata/v4/pocreation/POHeader(ID={{draftID}},IsActiveEntity=false)/AdminService.draftPrepare
+Content-Type: application/json
+{{auth}}
+
+{}
+
+
+### POHeader Draft Activate
+# @name POHeader_Draft_Activate
+POST {{server}}/odata/v4/pocreation/POHeader(ID={{draftID}},IsActiveEntity=false)/AdminService.draftActivate
+Content-Type: application/json
+{{auth}}
+
+{}
+
+
+### POItem
+# @name POItem_GET
+GET {{server}}/odata/v4/pocreation/POItem
+{{auth}}
+
+
+### POItem
+# @name POItem_POST
+POST {{server}}/odata/v4/pocreation/POItem
+Content-Type: application/json
+{{auth}}
+
+{
+  "ID": "591565e5-6e7b-47cb-95ca-285c8b89f5c8",
+  "PO_Number": 76,
+  "PO_Item_Num": 90,
+  "MCode": "MCode-591565",
+  "Quantity": 94,
+  "Amount": 90.19,
+  "M_Master": {
+    "CODE": "rial_Master-15934961"
+  }
+}
+
+
+### POItem
+# @name POItem_PATCH
+PATCH {{server}}/odata/v4/pocreation/POItem/591565e5-6e7b-47cb-95ca-285c8b89f5c8
+Content-Type: application/json
+{{auth}}
+
+{
+  "ID": "591565e5-6e7b-47cb-95ca-285c8b89f5c8",
+  "PO_Number": 76,
+  "PO_Item_Num": 90,
+  "MCode": "MCode-591565",
+  "Quantity": 94,
+  "Amount": 90.19,
+  "M_Master": {
+    "CODE": "rial_Master-15934961"
+  }
+}
+
+
+### POItem
+# @name POItem_DELETE
+DELETE {{server}}/odata/v4/pocreation/POItem/591565e5-6e7b-47cb-95ca-285c8b89f5c8
+Content-Type: application/json
+{{auth}}
+
+
+### PlantMaster
+# @name PlantMaster_GET
+GET {{server}}/odata/v4/pocreation/PlantMaster
+{{auth}}
+
+
+### PlantMaster
+# @name PlantMaster_POST
+POST {{server}}/odata/v4/pocreation/PlantMaster
+Content-Type: application/json
+{{auth}}
+
+{
+  "CODE": "PlantMaster-4285961",
+  "NAME": "NAME-4285961",
+  "CITY": "CITY-4285961"
+}
+
+
+### PlantMaster
+# @name PlantMaster_PATCH
+PATCH {{server}}/odata/v4/pocreation/PlantMaster/PlantMaster-4285961
+Content-Type: application/json
+{{auth}}
+
+{
+  "CODE": "PlantMaster-4285961",
+  "NAME": "NAME-4285961",
+  "CITY": "CITY-4285961"
+}
+
+
+### PlantMaster
+# @name PlantMaster_DELETE
+DELETE {{server}}/odata/v4/pocreation/PlantMaster/PlantMaster-4285961
+Content-Type: application/json
+{{auth}}
+
+
+### CompanyMaster
+# @name CompanyMaster_GET
+GET {{server}}/odata/v4/pocreation/CompanyMaster
+{{auth}}
+
+
+### CompanyMaster
+# @name CompanyMaster_POST
+POST {{server}}/odata/v4/pocreation/CompanyMaster
+Content-Type: application/json
+{{auth}}
+
+{
+  "CODE": "ompanyMaster-2942221",
+  "DESC": "DESC-2942221",
+  "WEBSITE": "WEBSITE-2942221",
+  "NAME": "NAME-2942221"
+}
+
+
+### CompanyMaster
+# @name CompanyMaster_PATCH
+PATCH {{server}}/odata/v4/pocreation/CompanyMaster/ompanyMaster-2942221
+Content-Type: application/json
+{{auth}}
+
+{
+  "CODE": "ompanyMaster-2942221",
+  "DESC": "DESC-2942221",
+  "WEBSITE": "WEBSITE-2942221",
+  "NAME": "NAME-2942221"
+}
+
+
+### CompanyMaster
+# @name CompanyMaster_DELETE
+DELETE {{server}}/odata/v4/pocreation/CompanyMaster/ompanyMaster-2942221
+Content-Type: application/json
+{{auth}}
+
+
+### POEvent
+# @name POEvent_GET
+GET {{server}}/odata/v4/pocreation/POEvent
+{{auth}}
+
+
+### POEvent
+# @name POEvent_POST
+POST {{server}}/odata/v4/pocreation/POEvent
+Content-Type: application/json
+{{auth}}
+
+{
+  "PO_Number": 1811847,
+  "EVENT_CODE": 1811847,
+  "EVENT_DESCRIPTION": "EVENT_DESCRIPTION-1811847",
+  "EVENT_DATE": "2007-11-20T00:00:00.000Z",
+  "EVENT_BY": "EVENT_BY-1811847"
+}
+
+
+### POEvent
+# @name POEvent_PATCH
+PATCH {{server}}/odata/v4/pocreation/POEvent(PO_Number=1811847,EVENT_CODE=1811847)
+Content-Type: application/json
+{{auth}}
+
+{
+  "PO_Number": 1811847,
+  "EVENT_CODE": 1811847,
+  "EVENT_DESCRIPTION": "EVENT_DESCRIPTION-1811847",
+  "EVENT_DATE": "2007-11-20T00:00:00.000Z",
+  "EVENT_BY": "EVENT_BY-1811847"
+}
+
+
+### POEvent
+# @name POEvent_DELETE
+DELETE {{server}}/odata/v4/pocreation/POEvent(PO_Number=1811847,EVENT_CODE=1811847)
+Content-Type: application/json
+{{auth}}
+
+
+### Material_Master
+# @name Material_Master_GET
+GET {{server}}/odata/v4/pocreation/Material_Master
+{{auth}}
+
+
+### Material_Master
+# @name Material_Master_POST
+POST {{server}}/odata/v4/pocreation/Material_Master
+Content-Type: application/json
+{{auth}}
+
+{
+  "CODE": "rial_Master-15934961",
+  "DESC": "DESC-15934961",
+  "Plant_Code": "Plant_Code-15934961",
+  "Price": 20.17587543,
+  "Material_Image": "Material_Image-15934961",
+  "Pl_Master": {
+    "CODE": "PlantMaster-4285961"
+  },
+  "Phone": "Phone-15934961",
+  "Fax": "Fax-15934961",
+  "Email": "Email.9hjht@example.org",
+  "LandLine": "LandLine-15934961"
+}
+
+
+### Material_Master
+# @name Material_Master_PATCH
+PATCH {{server}}/odata/v4/pocreation/Material_Master/rial_Master-15934961
+Content-Type: application/json
+{{auth}}
+
+{
+  "CODE": "rial_Master-15934961",
+  "DESC": "DESC-15934961",
+  "Plant_Code": "Plant_Code-15934961",
+  "Price": 20.17587543,
+  "Material_Image": "Material_Image-15934961",
+  "Pl_Master": {
+    "CODE": "PlantMaster-4285961"
+  },
+  "Phone": "Phone-15934961",
+  "Fax": "Fax-15934961",
+  "Email": "Email.9hjht@example.org",
+  "LandLine": "LandLine-15934961"
+}
+
+
+### Material_Master
+# @name Material_Master_DELETE
+DELETE {{server}}/odata/v4/pocreation/Material_Master/rial_Master-15934961
+Content-Type: application/json
+{{auth}}
+
+
+### StatusMaster
+# @name StatusMaster_GET
+GET {{server}}/odata/v4/pocreation/StatusMaster
+{{auth}}
+
+
+### StatusMaster
+# @name StatusMaster_POST
+POST {{server}}/odata/v4/pocreation/StatusMaster
+Content-Type: application/json
+{{auth}}
+
+{
+  "CODE": 13284878,
+  "DESC": "DESC-13284878"
+}
+
+
+### StatusMaster
+# @name StatusMaster_PATCH
+PATCH {{server}}/odata/v4/pocreation/StatusMaster/13284878
+Content-Type: application/json
+{{auth}}
+
+{
+  "CODE": 13284878,
+  "DESC": "DESC-13284878"
+}
+
+
+### StatusMaster
+# @name StatusMaster_DELETE
+DELETE {{server}}/odata/v4/pocreation/StatusMaster/13284878
+Content-Type: application/json
+{{auth}}
+
+
+### PO_Attachment
+# @name PO_Attachment_GET
+GET {{server}}/odata/v4/pocreation/PO_Attachment
+{{auth}}
+
+
+### PO_Attachment
+# @name PO_Attachment_POST
+POST {{server}}/odata/v4/pocreation/PO_Attachment
+Content-Type: application/json
+{{auth}}
+
+{
+  "ID": "28195878-ca89-4919-96c0-c018e20ad429",
+  "PO_Number": 69,
+  "File_Type": "File_Type-28195878",
+  "FileName": "FileName-28195878",
+  "createdAt": "2014-05-08T00:00:00.000Z",
+  "createdBy": "createdBy.gsc2u@example.com",
+  "modifiedAt": "2010-03-04T00:00:00.000Z",
+  "modifiedBy": "modifiedBy.gsc2u@example.com"
+}
+
+
+### PO_Attachment
+# @name PO_Attachment_PATCH
+PATCH {{server}}/odata/v4/pocreation/PO_Attachment/28195878-ca89-4919-96c0-c018e20ad429
+Content-Type: application/json
+{{auth}}
+
+{
+  "ID": "28195878-ca89-4919-96c0-c018e20ad429",
+  "PO_Number": 69,
+  "File_Type": "File_Type-28195878",
+  "FileName": "FileName-28195878",
+  "createdAt": "2014-05-08T00:00:00.000Z",
+  "createdBy": "createdBy.gsc2u@example.com",
+  "modifiedAt": "2010-03-04T00:00:00.000Z",
+  "modifiedBy": "modifiedBy.gsc2u@example.com"
+}
+
+
+### PO_Attachment
+# @name PO_Attachment_DELETE
+DELETE {{server}}/odata/v4/pocreation/PO_Attachment/28195878-ca89-4919-96c0-c018e20ad429
+Content-Type: application/json
+{{auth}}
+
+
+### Purchase_Attachment
+# @name Purchase_Attachment_GET
+GET {{server}}/odata/v4/pocreation/Purchase_Attachment
+{{auth}}
+
+
+### Purchase_Attachment
+# @name Purchase_Attachment_POST
+POST {{server}}/odata/v4/pocreation/Purchase_Attachment
+Content-Type: application/json
+{{auth}}
+
+{
+  "ID": "28899874-5195-4ccc-a018-64cf9acbe3af",
+  "PO_Number": 78,
+  "mediaType": "mediaType-28899874",
+  "fileName": "fileName-28899874",
+  "size": 42,
+  "url": "url-28899874",
+  "createdAt": "2010-03-10T00:00:00.000Z",
+  "createdBy": "createdBy.h7faa@example.com",
+  "modifiedAt": "2021-07-03T00:00:00.000Z",
+  "modifiedBy": "modifiedBy.h7faa@example.com"
+}
+
+
+### Purchase_Attachment
+# @name Purchase_Attachment_PATCH
+PATCH {{server}}/odata/v4/pocreation/Purchase_Attachment/28899874-5195-4ccc-a018-64cf9acbe3af
+Content-Type: application/json
+{{auth}}
+
+{
+  "ID": "28899874-5195-4ccc-a018-64cf9acbe3af",
+  "PO_Number": 78,
+  "mediaType": "mediaType-28899874",
+  "fileName": "fileName-28899874",
+  "size": 42,
+  "url": "url-28899874",
+  "createdAt": "2010-03-10T00:00:00.000Z",
+  "createdBy": "createdBy.h7faa@example.com",
+  "modifiedAt": "2021-07-03T00:00:00.000Z",
+  "modifiedBy": "modifiedBy.h7faa@example.com"
+}
+
+
+### Purchase_Attachment
+# @name Purchase_Attachment_DELETE
+DELETE {{server}}/odata/v4/pocreation/Purchase_Attachment/28899874-5195-4ccc-a018-64cf9acbe3af
+Content-Type: application/json
+{{auth}}
+
+
+### POExtraHeader
+# @name POExtraHeader_GET
+GET {{server}}/odata/v4/pocreation/POExtraHeader
+{{auth}}
+
+
+### POExtraHeader
+# @name POExtraHeader_POST
+POST {{server}}/odata/v4/pocreation/POExtraHeader
+Content-Type: application/json
+{{auth}}
+
+{
+  "ID": "27243688-937c-4fed-b9f3-5a5451c02fb6",
+  "PO_Number": 13,
+  "CreationDate": "2022-01-27",
+  "DeliveryDate": "2018-11-01",
+  "Status": 72,
+  "MadeBy": "MadeBy-27243688",
+  "PCode": "PCode-27243688",
+  "CompanyCode": "CompanyCode-27243688",
+  "Delete": "8",
+  "Criticality": 21,
+  "Total_Amount": 60.12,
+  "createdAt": "2009-03-30T00:00:00.000Z",
+  "createdBy": "createdBy.g7xd4@example.net",
+  "modifiedAt": "2000-10-23T00:00:00.000Z",
+  "modifiedBy": "modifiedBy.g7xd4@example.com"
+}
+
+
+### POExtraHeader
+# @name POExtraHeader_PATCH
+PATCH {{server}}/odata/v4/pocreation/POExtraHeader/27243688-937c-4fed-b9f3-5a5451c02fb6
+Content-Type: application/json
+{{auth}}
+
+{
+  "ID": "27243688-937c-4fed-b9f3-5a5451c02fb6",
+  "PO_Number": 13,
+  "CreationDate": "2022-01-27",
+  "DeliveryDate": "2018-11-01",
+  "Status": 72,
+  "MadeBy": "MadeBy-27243688",
+  "PCode": "PCode-27243688",
+  "CompanyCode": "CompanyCode-27243688",
+  "Delete": "8",
+  "Criticality": 21,
+  "Total_Amount": 60.12,
+  "createdAt": "2009-03-30T00:00:00.000Z",
+  "createdBy": "createdBy.g7xd4@example.net",
+  "modifiedAt": "2000-10-23T00:00:00.000Z",
+  "modifiedBy": "modifiedBy.g7xd4@example.com"
+}
+
+
+### POExtraHeader
+# @name POExtraHeader_DELETE
+DELETE {{server}}/odata/v4/pocreation/POExtraHeader/27243688-937c-4fed-b9f3-5a5451c02fb6
+Content-Type: application/json
+{{auth}}
+
+
+### POCreate
+# @name POCreate_POST
+POST {{server}}/odata/v4/pocreation/POCreate
+Content-Type: application/json
+{{auth}}
+
+{
+  "Header": null,
+  "Item": null,
+  "Event": null
+}
+
+
+### POCreation
+# @name POCreation_POST
+POST {{server}}/odata/v4/pocreation/POCreation
+Content-Type: application/json
+{{auth}}
+
+{
+  "Header": null
+}

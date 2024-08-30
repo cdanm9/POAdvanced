@@ -1,12 +1,11 @@
 {
-  "name": "approuter",
-  "main":"server.js",   
+  "name": "approuter",  
   "dependencies": {
     "@sap/approuter": "^16.0.0",
     "@sap/xsenv": "^5.2.0",
     "@sap/xssec": "^4.2.0",
     "express": "^4.17.1",
-    "passport": "^0.4.0"  
+    "passport": "^0.4.0"
   },
   "engines": {
     "node": "^20.0.0"
