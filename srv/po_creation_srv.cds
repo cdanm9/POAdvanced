@@ -15,8 +15,6 @@ service POCreationService {
      entity Purchase_Attachment as projection on prc.Purchase_Attachment;   
      entity POExtraHeader as projection on prc.PO_Extra_Header;    
 
-     action POCreate(Header:POHeader,Item: many POItem,Event:POEvent) returns array of String;
-     action POCreation(Header: POHeader) returns array of String;
        
      type POFunction:{
           POTest:Boolean;  

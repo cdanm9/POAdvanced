@@ -19,7 +19,4 @@ service POApprovalService {
      entity StatusMaster as projection on masters.Status_Master;
      entity ApproverMaster as projection on masters.Approver_Master;
      entity PO_Attachment as projection on prc.PO_Attachment;    
-     action POApprove(input:String) returns many String;
-     action POComplete(input:String) returns many String;
-     action POReject(input:String) returns many String;
 } 
