@@ -13,6 +13,7 @@ service POCreationService {
      entity StatusMaster as projection on masters.Status_Master;
      entity PO_Attachment as projection on prc.PO_Attachment;    
      entity Purchase_Attachment as projection on prc.Purchase_Attachment;   
+<<<<<<< HEAD
      entity POExtraHeader as projection on prc.PO_Extra_Header;    
 
        
@@ -21,4 +22,7 @@ service POCreationService {
      }
 
      function POReturn(PO_Number:String) returns POFunction;      
+=======
+     entity POExtraHeader as projection on prc.PO_Extra_Header;        
+>>>>>>> 9318e7ab87e3bde0cad583bc9c454f554d515989
 }  

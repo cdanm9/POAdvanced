@@ -37,9 +37,4 @@ context capm.mastertable{
     LEVEL: Integer;  
   }
 
-  entity MasterUser{
-    key user_id: String(30);
-    user_name:String(100);
-    email:String(500);
-  }
 }

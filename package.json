@@ -29,13 +29,9 @@
   },
   "scripts": {
     "start": "cds-serve",
-    "watch-poview": "cds watch --open poview/webapp/index.html?sap-ui-xx-viewCache=false",
     "undeploy": "cf undeploy PurchaseOrder --delete-services --delete-service-keys --delete-service-brokers",
     "build": "rimraf resources mta_archives && mbt build --mtar archive",
-    "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
-    "watch-overview_capm": "cds watch --open overview_capm/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-prcdashboard": "cds watch --open prcdashboard/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-project1": "cds watch --open project1/webapp/index.html?sap-ui-xx-viewCache=false"
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
   },
   "cds": {
     "fiori": {

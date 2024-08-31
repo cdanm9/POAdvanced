@@ -18,5 +18,9 @@ service POApprovalService {
      entity Material_Master as projection on masters.Material_Master;   
      entity StatusMaster as projection on masters.Status_Master;
      entity ApproverMaster as projection on masters.Approver_Master;
+<<<<<<< HEAD
      entity PO_Attachment as projection on prc.PO_Attachment;    
+=======
+     entity PO_Attachment as projection on prc.PO_Attachment;   
+>>>>>>> 9318e7ab87e3bde0cad583bc9c454f554d515989
 } 

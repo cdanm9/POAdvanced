@@ -21,20 +21,3 @@ module.exports=cds.service.impl(function(srv){
     })
 
 })
-
-
-// class POReportService extends cds.ApplicationService{
-//     async init(){
-//         const { POHeader, POItem } = this.entities;
-
-//         this.before('NEW', POHeader, async req => {
-//         })
-
-//         this.before('NEW', POItem, async req => {
-//         })
-
-//         await super.init()   
-//     }
-// }
-
-// module.exports = POReportService
