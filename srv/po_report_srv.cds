@@ -25,7 +25,6 @@ service POReportService {
           PCODE: String(20); 
           COMPANYCODE: String(20); 
           DELETE: String(1);               
-     }       
-     function POCancelled() returns oPOHeader;
+     }          
    
 } 

@@ -8,33 +8,30 @@
   "dependencies": {
     "@cap-js-community/odata-v2-adapter": "^1.13.1",
     "@cap-js/graphql": "^0.11.0",
-    "@sap/cds": "^7.9.3",
-    "@sap/cds-hana": "^2.0.0",
-    "@sap/hana-client": "^2.21.28",
-    "cds-swagger-ui-express": "^0.9.0",   
-    "@sap/hdbext": "^8.0.5",
-    "@sap/xsenv": "^5.1.0",
-    "@sap/xssec": "^3",
+    "@cap-js/hana": "^1.1.1",
+    "@cap-js/postgres": "^1.10.0",
+    "@cap-js/sqlite": "^1.7.3",
+    "@sap/cds": "^8.1.1",
+    "@sap/hdbext": "^8.0.6",
+    "@sap/xsenv": "^5.2.0",
+    "@sap/xssec": "^4.2.2",
     "express": "^4.19.2",
     "hdb": "^0.19.9",
     "passport": "^0.7.0",
-    "sap-hdbext-promisfied": "^2.202405.1"
+    "sap-hdbext-promisfied": "^2.202407.1"
   },
   "devDependencies": {
     "@sap/cds-dk": "^7.9.4",
     "@sap/hdi-deploy": "^5.2.0",
     "@sap/ux-specification": "^1.120.14",
+    "cds-swagger-ui-express": "^0.9.0",
     "rimraf": "^6.0.0"
   },
   "scripts": {
     "start": "cds-serve",
-    "watch-poview": "cds watch --open poview/webapp/index.html?sap-ui-xx-viewCache=false",
     "undeploy": "cf undeploy PurchaseOrder --delete-services --delete-service-keys --delete-service-brokers",
     "build": "rimraf resources mta_archives && mbt build --mtar archive",
-    "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
-    "watch-overview_capm": "cds watch --open overview_capm/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-prcdashboard": "cds watch --open prcdashboard/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-project1": "cds watch --open project1/webapp/index.html?sap-ui-xx-viewCache=false"
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
   },
   "cds": {
     "fiori": {

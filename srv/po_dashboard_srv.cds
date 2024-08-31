@@ -30,6 +30,5 @@ service PODashboardService@(requires:'authenticated-user'){
           COMPANYCODE: String(20); 
           DELETE: String(1);               
      }       
-     function POCancelled() returns oPOHeader;
    
 } 
