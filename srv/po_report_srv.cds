@@ -24,11 +24,6 @@ service POReportService {
           MADEBY: String(20); 
           PCODE: String(20); 
           COMPANYCODE: String(20); 
-          DELETE: String(1);               
-<<<<<<< HEAD
-     }       
-=======
-     }          
->>>>>>> 9318e7ab87e3bde0cad583bc9c454f554d515989
-   
+          DELETE: String(1);   
+     }  
 } 
