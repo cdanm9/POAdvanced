@@ -18,14 +18,13 @@
     "express": "^4.19.2",
     "hdb": "^0.19.9",
     "passport": "^0.7.0",
-    "sap-hdbext-promisfied": "^2.202407.1"
-  },
+    "sap-hdbext-promisfied": "^2.202407.1",
+    "cds-swagger-ui-express": "^0.9.0"      
+  },  
   "devDependencies": {
-    "@sap/cds-dk": "^7.9.4",
-    "@sap/hdi-deploy": "^5.2.0",
-    "@sap/ux-specification": "^1.120.14",
-    "cds-swagger-ui-express": "^0.9.0",
-    "rimraf": "^6.0.0"
+    "@sap/hdi-deploy": "^5.2.1",
+    "@sap/ux-specification": "^1.120.17",
+    "rimraf": "^6.0.1"
   },
   "scripts": {
     "start": "cds-serve",
@@ -34,6 +33,9 @@
     "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
   },
   "cds": {
+    "server": {
+      "index": true
+    },
     "fiori": {
       "bypass_draft": true
     },
@@ -44,7 +46,38 @@
       },
       "auth": "xsuaa",
       "destinations": true,
-      "connectivity": true
+      "connectivity": true,
+      "[sqlite]": {
+        "db": {
+          "kind": "sqlite",
+          "impl": "@cap-js/sqlite",
+          "credentials": {
+            "url": "db.sqlite"
+          },  
+          "schema_evolution": "auto"
+        },
+        "db-ext": {
+          "model": "db/sqlite"
+        }
+      },
+      "[pg]": {
+        "db": {
+          "kind": "postgres",
+          "dialect": "postgres",
+          "impl": "@cap-js/postgres",
+          "schema_evolution": "auto",
+          "credentials": {
+            "host": "localhost",
+            "port": 5432,
+            "user": "postgres",
+            "password": "postgres",
+            "database": "PurchaseOrderAdvanced"
+          }
+        },
+        "db-ext": {
+          "model": "db/postgres"
+        }
+      }
     },
     "hana": {
       "deploy-format": "hdbtable"

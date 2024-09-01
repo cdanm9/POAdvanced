@@ -15,10 +15,10 @@ service PODashboardService@(requires:'authenticated-user'){
      entity Material_Master as projection on masters.Material_Master;
      @restrict:[{grant:'WRITE',to:'ZPO_ADMIN'}]
      entity StatusMaster as projection on masters.Status_Master;
-     @readonly
-     entity POStarReport as projection on PO_STAR_JOIN;
-     @readonly  
-     entity PO_Header_Items as projection on POHEADERITEMS;  
+     // @readonly
+     // entity POStarReport as projection on PO_STAR_JOIN;
+     // @readonly  
+     // entity PO_Header_Items as projection on POHEADERITEMS;  
 
      type oPOHeader:many{
           PO_NUMBER: Integer64; 

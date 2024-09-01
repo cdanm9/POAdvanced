@@ -1,7 +1,9 @@
 const cds = require("@sap/cds");  
-cds.on('serving', service => {
+const cds_swagger = require ('cds-swagger-ui-express')
+
+cds.on ('bootstrap', app => {app.use(cds_swagger())}).on('serving', service => {
     addLinkToGraphQl(service)        
-})
+})   
 
 function addLinkToGraphQl(service) {
     const provider = (entity) => {

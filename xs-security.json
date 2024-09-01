@@ -1,5 +1,5 @@
 {
-  "xsappname": "PurchaseOrderAdvanced-a205e616trial-dev",
+  "xsappname": "PurchaseOrderAdvanced-xsapp",
   "tenant-mode": "dedicated",
   "scopes": [
     {
@@ -56,8 +56,8 @@
       "http://localhost:5000/",
       "https://port5000-workspaces-ws-q5vjd.us10.trial.applicationstudio.cloud.sap/",
       "https://*.applicationstudio.cloud.sap/**",
-      "https://a205e616trial-dev-purchaseorderadvanced.cfapps.us10-001.hana.ondemand.com/",
-      "https://a205e616trial-dev-purchaseorderadvanced-srv.cfapps.us10-001.hana.ondemand.com/",
+      "https://3945d9e9trial-dev-purchaseorderadvanced.cfapps.us10-001.hana.ondemand.com/",
+      "https://3945d9e9trial-dev-purchaseorderadvanced-srv.cfapps.us10-001.hana.ondemand.com/",
       "https://oauth.pstmn.io/v1/browser-callback/",
       "https://port8080-workspaces-ws-q5vjd.us10.trial.applicationstudio.cloud.sap/"
     ]
