@@ -49,6 +49,7 @@
   ],
   "oauth2-configuration": {
     "credential-types": [
+      "instance-secret",  
       "binding-secret",
       "x509"
     ],

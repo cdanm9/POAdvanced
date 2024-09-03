@@ -19,8 +19,8 @@
     "hdb": "^0.19.9",
     "passport": "^0.7.0",
     "sap-hdbext-promisfied": "^2.202407.1",
-    "cds-swagger-ui-express": "^0.9.0"      
-  },  
+    "cds-swagger-ui-express": "^0.9.0"
+  },
   "devDependencies": {
     "@sap/hdi-deploy": "^5.2.1",
     "@sap/ux-specification": "^1.120.17",
@@ -53,7 +53,7 @@
           "impl": "@cap-js/sqlite",
           "credentials": {
             "url": "db.sqlite"
-          },  
+          },
           "schema_evolution": "auto"
         },
         "db-ext": {

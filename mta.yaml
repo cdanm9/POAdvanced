@@ -28,6 +28,7 @@ modules:
       - name: PurchaseOrderAdvanced-auth
       - name: PurchaseOrderAdvanced-destination
       - name: PurchaseOrderAdvanced-connectivity
+      # - name: PurchaseOrderAdvanced-postgres
 
   - name: PurchaseOrderAdvanced-db-deployer
     type: hdb
@@ -56,6 +57,19 @@ modules:
       - name: PurchaseOrderAdvanced-auth
       - name: PurchaseOrderAdvanced-destination
 
+  # - name: PurchaseOrderAdvanced-postgres-deployer
+  #   type: nodejs
+  #   path: gen/pg
+  #   parameters:
+  #     buildpack: nodejs_buildpack
+  #     no-route: true
+  #     no-start: true
+  #     tasks:
+  #       - name: deploy-to-postgresql
+  #         command: npm start
+  #   requires:
+  #     - name: PurchaseOrderAdvanced-postgres
+
 resources:
   - name: PurchaseOrderAdvanced-db
     type: com.sap.xs.hdi-container
@@ -70,7 +84,7 @@ resources:
       path: ./xs-security.json
       config:
         # xsappname: PurchaseOrderAdvanced-${org}-${space}
-        xsappname: PurchaseOrderAdvanced-xsapp   
+        xsappname: PurchaseOrderAdvanced-xsapp
         tenant-mode: dedicated
   - name: PurchaseOrderAdvanced-destination
     type: org.cloudfoundry.managed-service
@@ -82,3 +96,8 @@ resources:
     parameters:
       service: connectivity
       service-plan: lite
+  # - name: PurchaseOrderAdvanced-postgres
+  #   type: org.cloudfoundry.managed-service
+  #   parameters:
+  #     service: postgresql-db
+  #     service-plan: development
