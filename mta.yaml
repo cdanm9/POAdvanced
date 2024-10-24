@@ -56,7 +56,6 @@ modules:
           forwardAuthToken: true
       - name: PurchaseOrderAdvanced-auth
       - name: PurchaseOrderAdvanced-destination
-
   # - name: PurchaseOrderAdvanced-postgres-deployer
   #   type: nodejs
   #   path: gen/pg
@@ -69,7 +68,6 @@ modules:
   #         command: npm start
   #   requires:
   #     - name: PurchaseOrderAdvanced-postgres
-
 resources:
   - name: PurchaseOrderAdvanced-db
     type: com.sap.xs.hdi-container

@@ -15,11 +15,12 @@
     "@sap/hdbext": "^8.0.6",
     "@sap/xsenv": "^5.2.0",
     "@sap/xssec": "^4.2.2",
+    "cds-swagger-ui-express": "^0.9.0",
     "express": "^4.19.2",
+    "git": "^0.1.5",
     "hdb": "^0.19.9",
     "passport": "^0.7.0",
-    "sap-hdbext-promisfied": "^2.202407.1",
-    "cds-swagger-ui-express": "^0.9.0"
+    "sap-hdbext-promisfied": "^2.202407.1"
   },
   "devDependencies": {
     "@sap/hdi-deploy": "^5.2.1",
@@ -30,7 +31,7 @@
     "start": "cds-serve",
     "undeploy": "cf undeploy PurchaseOrder --delete-services --delete-service-keys --delete-service-brokers",
     "build": "rimraf resources mta_archives && mbt build --mtar archive",
-    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+    "deploy": "cf deploy mta_archives/PurchaseOrderAdvanced_1.0.0.mtar --retries 1"
   },
   "cds": {
     "server": {

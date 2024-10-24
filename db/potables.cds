@@ -62,6 +62,13 @@ context capm.table{
     url: String;
   }
 
+  entity New_Attachment: cuid,managed{
+    PO_Number: Integer64; 
+    @Core.IsMediaType: true File_Type:String;
+    @Core.MediaType:File_Type File:LargeBinary @Core.ContentDisposition.Filename: FileName;    
+    FileName: String;    
+  }
+
   entity PO_Extra_Header: managed,cuid{
         // key POH_Unique: UUID; 
         @readonly @mandatory PO_Number: Integer64 not null; 
