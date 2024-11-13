@@ -1,5 +1,5 @@
 {
-  "xsappname": "PurchaseOrderAdvanced-xsapp",
+  "xsappname": "POAdvanced-xsapp",
   "tenant-mode": "dedicated",
   "scopes": [
     {
@@ -8,13 +8,7 @@
     },
     {
       "name": "$XSAPPNAME.ZPO_ADMIN",
-      "description": "ZPO_ADMIN",
-      "granted-apps": [
-        "$XSAPPNAME(application,92561479-dfe4-4098-9b79-fd1fa761e317,podashboard)"
-      ],
-      "grant-as-authority-to-apps": [
-        "$XSAPPNAME(application,92561479-dfe4-4098-9b79-fd1fa761e317,podashboard)"
-      ]
+      "description": "ZPO_ADMIN"
     },
     {
       "name": "$XSAPPNAME.ZPO_INITIATOR",
@@ -55,13 +49,8 @@
     ],
     "redirect-uris": [
       "http://localhost:5000/",
-      "https://port5000-workspaces-ws-q5vjd.us10.trial.applicationstudio.cloud.sap/",
-      "https://*.applicationstudio.cloud.sap/**",
-      "https://3945d9e9trial-dev-purchaseorderadvanced.cfapps.us10-001.hana.ondemand.com/",
-      "https://3945d9e9trial-dev-purchaseorderadvanced-srv.cfapps.us10-001.hana.ondemand.com/",
-      "https://oauth.pstmn.io/v1/browser-callback/",
-      "https://port8080-workspaces-ws-q5vjd.us10.trial.applicationstudio.cloud.sap/",
-      "https://dancblue-po-advanced.cfapps.us10-001.hana.ondemand.com/"
+      "https://*.applicationstudio.cloud.sap/**",   
+      "https://cdan-po-advanced.cfapps.us10-001.hana.ondemand.com/"
     ]
   }
 }

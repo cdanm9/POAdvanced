@@ -1,5 +1,5 @@
 {
-  "name": "PurchaseOrderAdvanced",
+  "name": "POAdvanced",
   "version": "1.0.0",
   "description": "Purchase Order",
   "repository": "PurchaseOrderAdvanced",
@@ -29,9 +29,11 @@
   },
   "scripts": {
     "start": "cds-serve",
-    "undeploy": "cf undeploy PurchaseOrder --delete-services --delete-service-keys --delete-service-brokers",
+    "watch-hybrid":"cds watch --profile hybrid",
+    "watch-apps":"cds bind --exec -- npm start --prefix app/router",
+    "undeploy": "cf undeploy POAdvanced --delete-services --delete-service-keys --delete-service-brokers",
     "build": "rimraf resources mta_archives && mbt build --mtar archive",
-    "deploy": "cf deploy mta_archives/PurchaseOrderAdvanced_1.0.0.mtar --retries 1"
+    "deploy": "cf deploy mta_archives/POAdvanced_1.0.0.mtar"
   },
   "cds": {
     "server": {
@@ -44,6 +46,9 @@
       "db": "hana",
       "[hybrid]": {
         "auth": "xsuaa"
+      },
+      "db-ext":{
+        "model":"db/hana"  
       },
       "auth": "xsuaa",
       "destinations": true,
@@ -72,7 +77,7 @@
             "port": 5432,
             "user": "postgres",
             "password": "postgres",
-            "database": "PurchaseOrderAdvanced"
+            "database": "POAdvanced"
           }
         },
         "db-ext": {
@@ -83,6 +88,5 @@
     "hana": {
       "deploy-format": "hdbtable"
     }
-  },
-  "sapux": []
+  }
 }
