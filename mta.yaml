@@ -1,101 +1,123 @@
-_schema-version: '3.1'
-ID: PurchaseOrderAdvanced
+_schema-version: "3.1"
+ID: POAdvanced
+description: PO Advanced
 version: 1.0.0
-description: "Purchase Order Advanced"
+modules:
+  - name: POAdvanced-srv
+    type: nodejs
+    path: gen/srv
+    requires:
+      - name: POAdvanced-db
+      - name: POAdvanced-auth
+      - name: POAdvanced-destination
+      - name: POAdvanced-connectivity
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: ${default-url}
+    parameters:
+      buildpack: nodejs_buildpack
+      disk-quota: 1024M
+      memory: 1024M
+    build-parameters:
+      builder: npm
+  - name: POAdvanced-db-deployer
+    type: hdb
+    path: gen/db
+    requires:
+      - name: POAdvanced-db
+    parameters:
+      buildpack: nodejs_buildpack
+      disk-quota: 1024M
+      memory: 1024M
+  - name: POAdvanced
+    type: approuter.nodejs
+    path: app/router
+    requires:
+      - name: srv-api
+        group: destinations
+        properties:
+          forwardAuthToken: true
+          name: srv-api
+          url: ~{srv-url}
+      - name: POAdvanced-auth
+      - name: POAdvanced-destination
+    parameters:
+      disk-quota: 256M
+      keep-existing-routes: true
+      memory: 256M
+  - name: POAdvanced-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: POAdvanced-repo-host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources
+      requires:
+        - artifacts:
+            - comsappocreation.zip
+          name: comsappocreation
+          target-path: resources/
+  - name: comsappocreation
+    type: html5
+    path: app/pocreation
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:cf
+      supported-platforms:
+        []
+resources:
+  - name: POAdvanced-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+  - name: POAdvanced-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        tenant-mode: dedicated
+        xsappname: POAdvanced-xsapp
+      path: ./xs-security.json
+      service: xsuaa
+      service-plan: application
+  - name: POAdvanced-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        HTML5Runtime_enabled: false
+        init_data:
+          instance:
+            destinations:
+              - Authentication: NoAuthentication
+                Name: ui5
+                ProxyType: Internet
+                Type: HTTP
+                URL: https://ui5.sap.com
+            existing_destinations_policy: update
+      service: destination
+      service-plan: lite
+  - name: POAdvanced-connectivity
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: connectivity
+      service-plan: lite
+  - name: POAdvanced-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-name: POAdvanced-html5-srv
+      service-plan: app-host
 parameters:
+  deploy_mode: html5-repo
   enable-parallel-deployments: true
 build-parameters:
   before-all:
     - builder: custom
       commands:
         - npx cds build --production
-modules:
-  - name: PurchaseOrderAdvanced-srv
-    type: nodejs
-    path: gen/srv
-    parameters:
-      memory: 1024M
-      disk-quota: 1024M
-      buildpack: nodejs_buildpack
-    build-parameters:
-      builder: npm
-    provides:
-      - name: srv-api # required by consumers of CAP services (e.g. approuter)
-        properties:
-          srv-url: ${default-url}
-    requires:
-      - name: PurchaseOrderAdvanced-db
-      - name: PurchaseOrderAdvanced-auth
-      - name: PurchaseOrderAdvanced-destination
-      - name: PurchaseOrderAdvanced-connectivity
-      # - name: PurchaseOrderAdvanced-postgres
-
-  - name: PurchaseOrderAdvanced-db-deployer
-    type: hdb
-    path: gen/db
-    parameters:
-      memory: 1024M
-      disk-quota: 1024M
-      buildpack: nodejs_buildpack
-    requires:
-      - name: PurchaseOrderAdvanced-db
-
-  - name: PurchaseOrderAdvanced
-    type: approuter.nodejs
-    path: app/router
-    parameters:
-      keep-existing-routes: true
-      disk-quota: 256M
-      memory: 256M
-    requires:
-      - name: srv-api
-        group: destinations
-        properties:
-          name: srv-api # must be used in xs-app.json as well
-          url: ~{srv-url}
-          forwardAuthToken: true
-      - name: PurchaseOrderAdvanced-auth
-      - name: PurchaseOrderAdvanced-destination
-  # - name: PurchaseOrderAdvanced-postgres-deployer
-  #   type: nodejs
-  #   path: gen/pg
-  #   parameters:
-  #     buildpack: nodejs_buildpack
-  #     no-route: true
-  #     no-start: true
-  #     tasks:
-  #       - name: deploy-to-postgresql
-  #         command: npm start
-  #   requires:
-  #     - name: PurchaseOrderAdvanced-postgres
-resources:
-  - name: PurchaseOrderAdvanced-db
-    type: com.sap.xs.hdi-container
-    parameters:
-      service: hana
-      service-plan: hdi-shared
-  - name: PurchaseOrderAdvanced-auth
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: xsuaa
-      service-plan: application
-      path: ./xs-security.json
-      config:
-        # xsappname: PurchaseOrderAdvanced-${org}-${space}
-        xsappname: PurchaseOrderAdvanced-xsapp
-        tenant-mode: dedicated
-  - name: PurchaseOrderAdvanced-destination
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: destination
-      service-plan: lite
-  - name: PurchaseOrderAdvanced-connectivity
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: connectivity
-      service-plan: lite
-  # - name: PurchaseOrderAdvanced-postgres
-  #   type: org.cloudfoundry.managed-service
-  #   parameters:
-  #     service: postgresql-db
-  #     service-plan: development

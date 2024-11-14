@@ -29,5 +29,6 @@
       "csrfProtection": false,
       "authenticationType": "xsuaa"
     }
-  ]
+  ],
+  "welcomeFile": "/comsappocreation"
 }
