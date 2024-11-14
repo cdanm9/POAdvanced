@@ -14,15 +14,11 @@ context com.sap.Master{
 
   entity Materials{
     key code: String(20);
+    name:String(100);
     desc: String(500);
     plantCode: String(20);
-    price:Double default 0.0;
-    image:String @UI : {IsImageURL : true};    
-    to_Plants: Association to Plants on to_Plants.code=plantCode;  
-    phone: String(20) @Communication.IsPhoneNumber;
-    fax:String(20);
-    email      : String(240) @Communication.IsEmailAddress; 
-    landline: String(20);                
+    price:Double default 0.0;     
+    to_Plants: Association to Plants on to_Plants.code=plantCode;                 
   }
 
   entity Statuses{
@@ -32,7 +28,13 @@ context com.sap.Master{
 
   entity Users{
     key id: String(20);
-    name: String(100);  
+    firstName: String(100); 
+    lastName:String(100);
+    loginName:String(50);
+    image:String @UI : {IsImageURL : true};  
+    imageUri:String;        
+    email: String(200) @Communication.IsEmailAddress;  
+    phone:String(20)@Communication.IsPhoneNumber;    
   }
 
 }

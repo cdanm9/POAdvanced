@@ -1,1 +1,13 @@
-code,desc,plantCode,price,image,phone,fax,email,landline
+code,name,desc,plantCode,price
+ST001,Steel Sheets,High-quality stainless steel sheets for manufacturing,RM001,5000
+AL002,Aluminum Rods,Lightweight aluminum rods for construction,RM001,3000
+EC003,Engine Components,Precision-machined engine components,CM002,15000
+CB004,Electrical Cables,Copper and insulated cables for wiring,CM002,4500
+CF005,Chassis Frame,Vehicle chassis frames for assembly,AI003,12000
+QT006,Quality Test Kits,Kits for material testing and quality checks,QT004,2000
+PK007,Packaging Boxes,Cardboard boxes for product packaging,PL006,150
+PC008,Plastic Containers,Durable plastic containers for storage,PL006,250
+RM009,Recycled Metal Sheets,Reprocessed metal sheets for secondary use,RW007,4000
+BP010,Brake Pads,High-friction brake pads for safety,SP008,6000
+FA011,Finished Engine Assembly,Complete engine assembly,FG009,50000
+ML012,Machine Oil Lubricant,High-grade lubricant for machine maintenance,MR010,1000
