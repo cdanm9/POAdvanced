@@ -20,7 +20,6 @@ annotate POCreationService.POItems with{
     materialCode       @title : 'Material Code';
     quantity     @title : 'Quantity';
     amount    @title : 'Amount';
-    to_Materials @title :'Material Master';
     to_POHeaders @title: 'Purchase Order Header'
 }
 

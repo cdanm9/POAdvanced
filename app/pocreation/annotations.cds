@@ -52,6 +52,18 @@ annotate service.POHeaders with @(
             Target : 'to_POAttachments/@UI.LineItem#POAttachments',
         },
     ],
+    UI.HeaderInfo : {
+        TypeName : 'Purchase Order Header',
+        TypeNamePlural : 'Purchase Order Header',
+        Title : {
+            $Type : 'UI.DataField',
+            Value : poNumber,
+        },
+        Description : {
+            $Type : 'UI.DataField',
+            Value : madeBy,
+        },
+    },
 );
 
 annotate service.POHeaders with {
@@ -111,7 +123,7 @@ annotate service.POHeaders with {
             ],
             Label : 'Company',
         },
-        Common.ValueListWithFixedValues : true,
+        Common.ValueListWithFixedValues : false,
         Common.Label : 'Company ',
 )};
 
@@ -178,8 +190,48 @@ annotate service.POAttachments with @(
         {
             $Type : 'UI.DataField',
             Value : content,
-            Label : 'content',
+            Label : 'File',
         },
     ]
 );
+
+annotate service.POHeaders with {
+    remarks @UI.MultiLineText : true
+};
+
+annotate service.POItems with {
+    materialCode @(Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'Materials',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : materialCode,
+                    ValueListProperty : 'code',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'name',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'desc',
+                },
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    ValueListProperty : 'plantCode',
+                    LocalDataProperty : to_Materials.plantCode,
+                },
+            ],
+            Label : 'Materials',
+        },
+        Common.ValueListWithFixedValues : false
+)};
+
+annotate service.Materials with {
+    code @Common.Text : {
+        $value : name,
+        ![@UI.TextArrangement] : #TextOnly,
+    }
+};
 

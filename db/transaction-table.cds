@@ -26,8 +26,7 @@ context com.sap.Transaction{
     poItemNo:Integer not null; 
     materialCode: String(20);    
     quantity: Integer @assert.range:[1,100];          
-    amount: Decimal; 
-    to_Materials: Association to Master.Materials on to_Materials.code=materialCode;      
+    amount: Decimal;    
     to_POHeaders: Association to POHeaders;    
   }  
 
