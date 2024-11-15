@@ -6,7 +6,7 @@ module.exports=cds.service.impl(function(srv){
     this.before('NEW', POHeaders.draft, async req => {
         try{
             let {entity,path,target}=req,aPONumber;
-            if(entity==target){
+            if(entity==target){   
                 aPONumber= await SELECT .from(POHeaders,['Max(poNumber) as poNumber']);       
                 req.data.poNumber=(!aPONumber[0]?.poNumber)?10001:(Number(aPONumber[0].poNumber)+1)
                 req.data.status=5        
@@ -130,6 +130,6 @@ module.exports=cds.service.impl(function(srv){
         } 
     })
 
-    this.on ('error', async (err, req) => {         
+    this.on('error', async (err, req) => {         
     })
 });

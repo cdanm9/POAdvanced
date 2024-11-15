@@ -217,11 +217,6 @@ annotate service.POItems with {
                     $Type : 'Common.ValueListParameterDisplayOnly',
                     ValueListProperty : 'desc',
                 },
-                {
-                    $Type : 'Common.ValueListParameterInOut',
-                    ValueListProperty : 'plantCode',
-                    LocalDataProperty : to_Materials.plantCode,
-                },
             ],
             Label : 'Materials',
         },

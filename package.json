@@ -1,95 +1,95 @@
 {
-    "name": "POAdvanced",
-    "version": "1.0.0",
-    "description": "Purchase Order",
-    "repository": "PurchaseOrderAdvanced",
-    "license": "UNLICENSED",
-    "private": true,
-    "dependencies": {
-        "@cap-js-community/odata-v2-adapter": "^1.13.1",
-        "@cap-js/graphql": "^0.11.0",
-        "@cap-js/hana": "^1.1.1",
-        "@cap-js/postgres": "^1.10.0",
-        "@cap-js/sqlite": "^1.7.3",
-        "@sap/cds": "^8.1.1",
-        "@sap/hana-client": "^2.22.32",
-        "@sap/hdbext": "^8.0.6",
-        "@sap/xsenv": "^5.2.0",
-        "@sap/xssec": "^4.2.2",
-        "cds-swagger-ui-express": "^0.9.0",
-        "express": "^4.19.2",
-        "git": "^0.1.5",
-        "hdb": "^0.19.9",
-        "passport": "^0.7.0",
-        "sap-hdbext-promisfied": "^2.202407.1"
+  "name": "POAdvanced",
+  "version": "1.0.0",
+  "description": "Purchase Order",
+  "repository": "PurchaseOrderAdvanced",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@cap-js-community/odata-v2-adapter": "^1.13.1",
+    "@cap-js/graphql": "^0.11.0",
+    "@cap-js/hana": "^1.1.1",
+    "@cap-js/postgres": "^1.10.0",
+    "@cap-js/sqlite": "^1.7.3",
+    "@sap/cds": "^8.1.1",
+    "@sap/hana-client": "^2.22.32",
+    "@sap/hdbext": "^8.0.6",
+    "@sap/xsenv": "^5.2.0",
+    "@sap/xssec": "^4.2.2",
+    "cds-swagger-ui-express": "^0.9.0",
+    "express": "^4.19.2",
+    "git": "^0.1.5",
+    "hdb": "^0.19.9",
+    "passport": "^0.7.0",
+    "sap-hdbext-promisfied": "^2.202407.1"
+  },
+  "devDependencies": {
+    "@sap/hdi-deploy": "^5.2.1",
+    "@sap/ux-specification": "UI5-1.130",
+    "rimraf": "^6.0.1"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-hybrid": "cds watch --profile hybrid",
+    "watch-apps": "cds bind --exec -- npm start --prefix app/router",
+    "undeploy": "cf undeploy POAdvanced --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+    "build-deploy": "mbt build && cf deploy mta_archives/POAdvanced_1.0.0.mtar",
+    "watch-pocreation": "cds watch --open pocreation/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "cds": {
+    "server": {
+      "index": true
     },
-    "devDependencies": {
-        "@sap/hdi-deploy": "^5.2.1",
-        "@sap/ux-specification": "UI5-1.130",
-        "rimraf": "^6.0.1"
+    "fiori": {
+      "bypass_draft": true
     },
-    "scripts": {
-        "start": "cds-serve",
-        "watch-hybrid": "cds watch --profile hybrid",
-        "watch-apps": "cds bind --exec -- npm start --prefix app/router",
-        "undeploy": "cf undeploy POAdvanced --delete-services --delete-service-keys --delete-service-brokers",
-        "build": "rimraf resources mta_archives && mbt build --mtar archive",
-        "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
-        "build-deploy": "mbt build && cf deploy mta_archives/POAdvanced_1.0.0.mtar",
-        "watch-pocreation": "cds watch --open pocreation/webapp/index.html?sap-ui-xx-viewCache=false"
-    },
-    "cds": {
-        "server": {
-            "index": true
+    "requires": {
+      "db": "hana",
+      "[hybrid]": {
+        "auth": "xsuaa"
+      },
+      "auth": "xsuaa",
+      "destinations": true,
+      "connectivity": true,
+      "[sqlite]": {
+        "db": {
+          "kind": "sqlite",
+          "impl": "@cap-js/sqlite",
+          "credentials": {
+            "url": "db.sqlite"
+          },
+          "schema_evolution": "auto"
         },
-        "fiori": {
-            "bypass_draft": true
-        },
-        "requires": {
-            "db": "hana",
-            "[hybrid]": {
-                "auth": "xsuaa"
-            },
-            "auth": "xsuaa",
-            "destinations": true,
-            "connectivity": true,
-            "[sqlite]": {
-                "db": {
-                    "kind": "sqlite",
-                    "impl": "@cap-js/sqlite",
-                    "credentials": {
-                        "url": "db.sqlite"
-                    },
-                    "schema_evolution": "auto"
-                },
-                "db-ext": {
-                    "model": "db/sqlite"
-                }
-            },
-            "[pg]": {
-                "db": {
-                    "kind": "postgres",
-                    "dialect": "postgres",
-                    "impl": "@cap-js/postgres",
-                    "schema_evolution": "auto",
-                    "credentials": {
-                        "host": "localhost",
-                        "port": 5432,
-                        "user": "postgres",
-                        "password": "postgres",
-                        "database": "POAdvanced"
-                    }
-                },
-                "db-ext": {
-                    "model": "db/postgres"
-                }
-            }
-        },
-        "hana": {
-            "deploy-format": "hdbtable"
+        "db-ext": {
+          "model": "db/sqlite"
         }
+      },
+      "[pg]": {
+        "db": {
+          "kind": "postgres",
+          "dialect": "postgres",
+          "impl": "@cap-js/postgres",
+          "schema_evolution": "auto",
+          "credentials": {
+            "host": "localhost",
+            "port": 5432,
+            "user": "postgres",
+            "password": "postgres",
+            "database": "POAdvanced"
+          }
+        },
+        "db-ext": {
+          "model": "db/postgres"
+        }
+      }
     },
-    "sapux": [
-        "app/pocreation"
-    ]
+    "hana": {
+      "deploy-format": "hdbtable"
+    }
+  },
+  "sapux": [
+    "app/pocreation"
+  ]
 }

@@ -68,8 +68,7 @@ annotate POCreationService.POItems with @(
             {Value: poItemNo},
             {Value: materialCode},
             {Value: quantity},
-            {Value: amount},
-            {Value:to_Materials.image},
+            {Value: amount}
         ]
     }
 ){};
