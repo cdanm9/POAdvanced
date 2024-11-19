@@ -3,7 +3,8 @@ using com.sap.Master as Master from './master-table';
 context com.sap.Transaction{
      
   entity POHeaders: managed,cuid{
-    poNumber: Integer64 not null; 
+    // poNumber: Integer64 not null; 
+    poNumber: Integer64; 
     deliveryDate: Date;
     status: Integer; 
     @Search.fuzzinessThreshold: 0.7   
@@ -22,8 +23,10 @@ context com.sap.Transaction{
 
   entity POItems: cuid{         
     // key POI_Unique: UUID;
-    poNumber: Integer64 not null;
-    poItemNo:Integer not null; 
+    // poNumber: Integer64 not null;
+    poNumber: Integer64;
+    // poItemNo:Integer not null;   
+    poItemNo:Integer; 
     materialCode: String(20);    
     quantity: Integer @assert.range:[1,100];          
     amount: Decimal; 

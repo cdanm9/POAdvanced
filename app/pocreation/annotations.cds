@@ -111,7 +111,7 @@ annotate service.POHeaders with {
             ],
             Label : 'Company',
         },
-        Common.ValueListWithFixedValues : true,
+        Common.ValueListWithFixedValues : false,
         Common.Label : 'Company ',
 )};
 
@@ -178,8 +178,48 @@ annotate service.POAttachments with @(
         {
             $Type : 'UI.DataField',
             Value : content,
-            Label : 'content',
+            Label : 'File',
         },
     ]
 );
+
+annotate service.POHeaders with {
+    remarks @UI.MultiLineText : true
+};
+
+annotate service.POItems with {
+    materialCode @(Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'Materials',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : materialCode,
+                    ValueListProperty : 'code',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'name',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'desc',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'plantCode',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'price',
+                },
+            ],
+            Label : 'Materials',
+        },
+        Common.ValueListWithFixedValues : false
+)};
+
+annotate service.Materials with {
+    code @Common.Text : name
+};
 
