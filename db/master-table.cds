@@ -2,12 +2,13 @@ context com.sap.Master{
   entity Plants{
     key code: String(20);     
     name: String(100);
-    city: String(100);   
+    city: String(100); 
+    to_Materials: Association to many Materials on to_Materials.plantCode=code;           
   }
 
   entity Companies{
     key code : String(20);
-    desc: String(500);
+    desc: String(500);  
     website: String(500);
     name: String(500);
   }
@@ -16,9 +17,9 @@ context com.sap.Master{
     key code: String(20);
     name:String(100);
     desc: String(500);
-    plantCode: String(20);
+    plantCode: String(20);   
     price:Double default 0.0;     
-    to_Plants: Association to Plants on to_Plants.code=plantCode;                 
+    to_Plants: Association to one Plants on to_Plants.code=plantCode;                 
   }
 
   entity Statuses{

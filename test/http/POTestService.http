@@ -1,0 +1,346 @@
+@server = http://localhost:4004
+@auth = Authorization: Basic alice:
+
+
+### POHeaders
+# @name POHeaders_GET
+GET {{server}}/odata/v4/potest/POHeaders
+{{auth}}
+
+
+### POHeaders
+# @name POHeaders_POST
+POST {{server}}/odata/v4/potest/POHeaders
+Content-Type: application/json
+{{auth}}
+
+{
+  "ID": "10198266-20d7-4885-ab3b-9094b9af25bd",
+  "poNumber": 56,
+  "deliveryDate": "2021-11-28",
+  "status": 75,
+  "madeBy": "madeBy.62l16@example.org",
+  "remarks": "remarks-10198266",
+  "plantCode": "plantCode-10198266",
+  "companyCode": "companyCode-10198266",
+  "criticality": 95,
+  "totalAmount": 51.26,
+  "to_Plants": {
+    "code": "Plants-19514944"
+  },
+  "to_Companies": {
+    "code": "Companies-667712"
+  },
+  "to_Statuses": {
+    "code": 28025754
+  },
+  "to_POItems": [
+    {
+      "ID": "66222392-e176-4071-9732-9522f294998f",
+      "poNumber": 7,
+      "poItemNo": 82,
+      "materialCode": "materialCode-6622239",
+      "quantity": 13,
+      "amount": 41.12,
+      "to_Materials": {
+        "code": "Materials-22391261"
+      }
+    },
+    {
+      "ID": "6622240e-dd6d-41e2-8b2d-bb9725118c3a",
+      "poNumber": 61,
+      "poItemNo": 96,
+      "materialCode": "materialCode-6622240",
+      "quantity": 96,
+      "amount": 92.12,
+      "to_Materials": {
+        "code": "Materials-22391261"
+      }
+    }
+  ],
+  "createdAt": "2020-08-04T00:00:00.000Z",
+  "createdBy": "createdBy.62l16@example.net",
+  "modifiedAt": "2008-04-12T00:00:00.000Z",
+  "modifiedBy": "modifiedBy.62l16@example.org"
+}
+
+
+### POHeaders
+# @name POHeaders_PATCH
+PATCH {{server}}/odata/v4/potest/POHeaders/10198266-20d7-4885-ab3b-9094b9af25bd
+Content-Type: application/json
+{{auth}}
+
+{
+  "ID": "10198266-20d7-4885-ab3b-9094b9af25bd",
+  "poNumber": 56,
+  "deliveryDate": "2021-11-28",
+  "status": 75,
+  "madeBy": "madeBy.62l16@example.org",
+  "remarks": "remarks-10198266",
+  "plantCode": "plantCode-10198266",
+  "companyCode": "companyCode-10198266",
+  "criticality": 95,
+  "totalAmount": 51.26,
+  "to_Plants": {
+    "code": "Plants-19514944"
+  },
+  "to_Companies": {
+    "code": "Companies-667712"
+  },
+  "to_Statuses": {
+    "code": 28025754
+  },
+  "to_POItems": [
+    {
+      "ID": "66222392-e176-4071-9732-9522f294998f",
+      "poNumber": 7,
+      "poItemNo": 82,
+      "materialCode": "materialCode-6622239",
+      "quantity": 13,
+      "amount": 41.12,
+      "to_Materials": {
+        "code": "Materials-22391261"
+      }
+    },
+    {
+      "ID": "6622240e-dd6d-41e2-8b2d-bb9725118c3a",
+      "poNumber": 61,
+      "poItemNo": 96,
+      "materialCode": "materialCode-6622240",
+      "quantity": 96,
+      "amount": 92.12,
+      "to_Materials": {
+        "code": "Materials-22391261"
+      }
+    }
+  ],
+  "createdAt": "2020-08-04T00:00:00.000Z",
+  "createdBy": "createdBy.62l16@example.net",
+  "modifiedAt": "2008-04-12T00:00:00.000Z",
+  "modifiedBy": "modifiedBy.62l16@example.org"
+}
+
+
+### POHeaders
+# @name POHeaders_DELETE
+DELETE {{server}}/odata/v4/potest/POHeaders/10198266-20d7-4885-ab3b-9094b9af25bd
+Content-Type: application/json
+{{auth}}
+
+
+### POItems
+# @name POItems_GET
+GET {{server}}/odata/v4/potest/POItems
+{{auth}}
+
+
+### POItems
+# @name POItems_POST
+POST {{server}}/odata/v4/potest/POItems
+Content-Type: application/json
+{{auth}}
+
+{
+  "ID": "66222392-e176-4071-9732-9522f294998f",
+  "poNumber": 7,
+  "poItemNo": 82,
+  "materialCode": "materialCode-6622239",
+  "quantity": 13,
+  "amount": 41.12,
+  "to_Materials": {
+    "code": "Materials-22391261"
+  }
+}
+
+
+### POItems
+# @name POItems_PATCH
+PATCH {{server}}/odata/v4/potest/POItems/66222392-e176-4071-9732-9522f294998f
+Content-Type: application/json
+{{auth}}
+
+{
+  "ID": "66222392-e176-4071-9732-9522f294998f",
+  "poNumber": 7,
+  "poItemNo": 82,
+  "materialCode": "materialCode-6622239",
+  "quantity": 13,
+  "amount": 41.12,
+  "to_Materials": {
+    "code": "Materials-22391261"
+  }
+}
+
+
+### POItems
+# @name POItems_DELETE
+DELETE {{server}}/odata/v4/potest/POItems/66222392-e176-4071-9732-9522f294998f
+Content-Type: application/json
+{{auth}}
+
+
+### Plants
+# @name Plants_GET
+GET {{server}}/odata/v4/potest/Plants
+{{auth}}
+
+
+### Plants
+# @name Plants_POST
+POST {{server}}/odata/v4/potest/Plants
+Content-Type: application/json
+{{auth}}
+
+{
+  "code": "Plants-19514944",
+  "name": "name-19514944",
+  "city": "city-19514944"
+}
+
+
+### Plants
+# @name Plants_PATCH
+PATCH {{server}}/odata/v4/potest/Plants/Plants-19514944
+Content-Type: application/json
+{{auth}}
+
+{
+  "code": "Plants-19514944",
+  "name": "name-19514944",
+  "city": "city-19514944"
+}
+
+
+### Plants
+# @name Plants_DELETE
+DELETE {{server}}/odata/v4/potest/Plants/Plants-19514944
+Content-Type: application/json
+{{auth}}
+
+
+### Companies
+# @name Companies_GET
+GET {{server}}/odata/v4/potest/Companies
+{{auth}}
+
+
+### Companies
+# @name Companies_POST
+POST {{server}}/odata/v4/potest/Companies
+Content-Type: application/json
+{{auth}}
+
+{
+  "code": "Companies-667712",
+  "desc": "desc-667712",
+  "website": "website-667712",
+  "name": "name-667712"
+}
+
+
+### Companies
+# @name Companies_PATCH
+PATCH {{server}}/odata/v4/potest/Companies/Companies-667712
+Content-Type: application/json
+{{auth}}
+
+{
+  "code": "Companies-667712",
+  "desc": "desc-667712",
+  "website": "website-667712",
+  "name": "name-667712"
+}
+
+
+### Companies
+# @name Companies_DELETE
+DELETE {{server}}/odata/v4/potest/Companies/Companies-667712
+Content-Type: application/json
+{{auth}}
+
+
+### Materials
+# @name Materials_GET
+GET {{server}}/odata/v4/potest/Materials
+{{auth}}
+
+
+### Materials
+# @name Materials_POST
+POST {{server}}/odata/v4/potest/Materials
+Content-Type: application/json
+{{auth}}
+
+{
+  "code": "Materials-22391261",
+  "name": "name-22391261",
+  "desc": "desc-22391261",
+  "plantCode": "plantCode-22391261",
+  "price": 50.12980085,
+  "to_Plants": {
+    "code": "Plants-19514944"
+  }
+}
+
+
+### Materials
+# @name Materials_PATCH
+PATCH {{server}}/odata/v4/potest/Materials/Materials-22391261
+Content-Type: application/json
+{{auth}}
+
+{
+  "code": "Materials-22391261",
+  "name": "name-22391261",
+  "desc": "desc-22391261",
+  "plantCode": "plantCode-22391261",
+  "price": 50.12980085,
+  "to_Plants": {
+    "code": "Plants-19514944"
+  }
+}
+
+
+### Materials
+# @name Materials_DELETE
+DELETE {{server}}/odata/v4/potest/Materials/Materials-22391261
+Content-Type: application/json
+{{auth}}
+
+
+### Statuses
+# @name Statuses_GET
+GET {{server}}/odata/v4/potest/Statuses
+{{auth}}
+
+
+### Statuses
+# @name Statuses_POST
+POST {{server}}/odata/v4/potest/Statuses
+Content-Type: application/json
+{{auth}}
+
+{
+  "code": 28025754,
+  "desc": "desc-28025754"
+}
+
+
+### Statuses
+# @name Statuses_PATCH
+PATCH {{server}}/odata/v4/potest/Statuses/28025754
+Content-Type: application/json
+{{auth}}
+
+{
+  "code": 28025754,
+  "desc": "desc-28025754"
+}
+
+
+### Statuses
+# @name Statuses_DELETE
+DELETE {{server}}/odata/v4/potest/Statuses/28025754
+Content-Type: application/json
+{{auth}}

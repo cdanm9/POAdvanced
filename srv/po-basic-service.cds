@@ -8,4 +8,5 @@ service POBaseService {
      entity CompanyMaster as projection on Master.Companies;
      entity Material_Master as projection on Master.Materials;           
      entity StatusMaster as projection on Master.Statuses; 
+     // entity POAttachments as projection on Transaction.POAttachments;  
 } 

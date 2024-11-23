@@ -1,1 +1,2 @@
-id,firstName,lastName,loginName,email,phone
+id,firstName,lastName,loginName,image,imageUri,email,phone
+100,Chandan,Moolya,chandan.m,sap-icon://log,sap-icon://log,dan.moolya@gmail.com,9324166211  

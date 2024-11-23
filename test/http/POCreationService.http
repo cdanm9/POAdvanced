@@ -1,0 +1,365 @@
+@server = http://localhost:4004
+@auth = Authorization: Basic alice:
+
+
+### POHeaders
+# @name POHeaders_GET
+GET {{server}}/odata/v4/pocreation/POHeaders
+{{auth}}
+
+
+### POHeaders Drafts GET
+# @name POHeaders_Drafts_GET
+GET {{server}}/odata/v4/pocreation/POHeaders?$filter=(IsActiveEntity eq false)
+{{auth}}
+
+
+### POHeaders Draft POST
+# @name POHeaders_Draft_POST
+POST {{server}}/odata/v4/pocreation/POHeaders
+Content-Type: application/json
+{{auth}}
+
+{
+  "poNumber": 22,
+  "deliveryDate": "2023-06-30",
+  "status": 20,
+  "madeBy": "madeBy.82xfe@example.com",
+  "remarks": "remarks-13573562",
+  "plantCode": "plantCode-13573562",
+  "companyCode": "companyCode-13573562",
+  "criticality": 29,
+  "totalAmount": 24.3,
+  "to_Plants": {
+    "code": "Plants-21553600"
+  },
+  "to_Companies": {
+    "code": "Companies-3171774"
+  },
+  "to_Statuses": {
+    "code": 3895276
+  },
+  "to_POItems": [
+    {
+      "ID": "21252946-679a-4fd7-9d18-20706fe9c888",
+      "poNumber": 61,
+      "poItemNo": 36,
+      "materialCode": "aterialCode-21252946",
+      "quantity": 44,
+      "amount": 69.29,
+      "to_Materials": {
+        "code": "Materials-13467951"
+      }
+    },
+    {
+      "ID": "21252947-7be9-493e-aa4e-adbc2dfb111b",
+      "poNumber": 36,
+      "poItemNo": 94,
+      "materialCode": "aterialCode-21252947",
+      "quantity": 11,
+      "amount": 12.11,
+      "to_Materials": {
+        "code": "Materials-13467951"
+      }
+    }
+  ],
+  "createdAt": "2019-11-21T00:00:00.000Z",
+  "createdBy": "createdBy.82xfe@example.com",
+  "modifiedAt": "2007-09-11T00:00:00.000Z",
+  "modifiedBy": "modifiedBy.82xfe@example.com"
+}
+
+
+### Result from POST request above
+@draftID = {{POHeaders_Draft_POST.response.body.$.ID}}
+
+
+### POHeaders Draft PATCH
+# @name POHeaders_Draft_Patch
+PATCH {{server}}/odata/v4/pocreation/POHeaders(ID={{draftID}},IsActiveEntity=false)
+Content-Type: application/json
+{{auth}}
+
+{
+  "poNumber": 22,
+  "deliveryDate": "2023-06-30",
+  "status": 20,
+  "madeBy": "madeBy.82xfe@example.com",
+  "remarks": "remarks-13573562",
+  "plantCode": "plantCode-13573562",
+  "companyCode": "companyCode-13573562",
+  "criticality": 29,
+  "totalAmount": 24.3,
+  "to_Plants": {
+    "code": "Plants-21553600"
+  },
+  "to_Companies": {
+    "code": "Companies-3171774"
+  },
+  "to_Statuses": {
+    "code": 3895276
+  },
+  "to_POItems": [
+    {
+      "ID": "21252946-679a-4fd7-9d18-20706fe9c888",
+      "poNumber": 61,
+      "poItemNo": 36,
+      "materialCode": "aterialCode-21252946",
+      "quantity": 44,
+      "amount": 69.29,
+      "to_Materials": {
+        "code": "Materials-13467951"
+      }
+    },
+    {
+      "ID": "21252947-7be9-493e-aa4e-adbc2dfb111b",
+      "poNumber": 36,
+      "poItemNo": 94,
+      "materialCode": "aterialCode-21252947",
+      "quantity": 11,
+      "amount": 12.11,
+      "to_Materials": {
+        "code": "Materials-13467951"
+      }
+    }
+  ],
+  "createdAt": "2019-11-21T00:00:00.000Z",
+  "createdBy": "createdBy.82xfe@example.com",
+  "modifiedAt": "2007-09-11T00:00:00.000Z",
+  "modifiedBy": "modifiedBy.82xfe@example.com"
+}
+
+
+### POHeaders Draft Prepare
+# @name POHeaders_Draft_Prepare
+POST {{server}}/odata/v4/pocreation/POHeaders(ID={{draftID}},IsActiveEntity=false)/AdminService.draftPrepare
+Content-Type: application/json
+{{auth}}
+
+{}
+
+
+### POHeaders Draft Activate
+# @name POHeaders_Draft_Activate
+POST {{server}}/odata/v4/pocreation/POHeaders(ID={{draftID}},IsActiveEntity=false)/AdminService.draftActivate
+Content-Type: application/json
+{{auth}}
+
+{}
+
+
+### POItems
+# @name POItems_GET
+GET {{server}}/odata/v4/pocreation/POItems
+{{auth}}
+
+
+### POItems
+# @name POItems_POST
+POST {{server}}/odata/v4/pocreation/POItems
+Content-Type: application/json
+{{auth}}
+
+{
+  "ID": "21252946-679a-4fd7-9d18-20706fe9c888",
+  "poNumber": 61,
+  "poItemNo": 36,
+  "materialCode": "aterialCode-21252946",
+  "quantity": 44,
+  "amount": 69.29,
+  "to_Materials": {
+    "code": "Materials-13467951"
+  }
+}
+
+
+### POItems
+# @name POItems_PATCH
+PATCH {{server}}/odata/v4/pocreation/POItems/21252946-679a-4fd7-9d18-20706fe9c888
+Content-Type: application/json
+{{auth}}
+
+{
+  "ID": "21252946-679a-4fd7-9d18-20706fe9c888",
+  "poNumber": 61,
+  "poItemNo": 36,
+  "materialCode": "aterialCode-21252946",
+  "quantity": 44,
+  "amount": 69.29,
+  "to_Materials": {
+    "code": "Materials-13467951"
+  }
+}
+
+
+### POItems
+# @name POItems_DELETE
+DELETE {{server}}/odata/v4/pocreation/POItems/21252946-679a-4fd7-9d18-20706fe9c888
+Content-Type: application/json
+{{auth}}
+
+
+### Plants
+# @name Plants_GET
+GET {{server}}/odata/v4/pocreation/Plants
+{{auth}}
+
+
+### Plants
+# @name Plants_POST
+POST {{server}}/odata/v4/pocreation/Plants
+Content-Type: application/json
+{{auth}}
+
+{
+  "code": "Plants-21553600",
+  "name": "name-21553600",
+  "city": "city-21553600"
+}
+
+
+### Plants
+# @name Plants_PATCH
+PATCH {{server}}/odata/v4/pocreation/Plants/Plants-21553600
+Content-Type: application/json
+{{auth}}
+
+{
+  "code": "Plants-21553600",
+  "name": "name-21553600",
+  "city": "city-21553600"
+}
+
+
+### Plants
+# @name Plants_DELETE
+DELETE {{server}}/odata/v4/pocreation/Plants/Plants-21553600
+Content-Type: application/json
+{{auth}}
+
+
+### Companies
+# @name Companies_GET
+GET {{server}}/odata/v4/pocreation/Companies
+{{auth}}
+
+
+### Companies
+# @name Companies_POST
+POST {{server}}/odata/v4/pocreation/Companies
+Content-Type: application/json
+{{auth}}
+
+{
+  "code": "Companies-3171774",
+  "desc": "desc-3171774",
+  "website": "website-3171774",
+  "name": "name-3171774"
+}
+
+
+### Companies
+# @name Companies_PATCH
+PATCH {{server}}/odata/v4/pocreation/Companies/Companies-3171774
+Content-Type: application/json
+{{auth}}
+
+{
+  "code": "Companies-3171774",
+  "desc": "desc-3171774",
+  "website": "website-3171774",
+  "name": "name-3171774"
+}
+
+
+### Companies
+# @name Companies_DELETE
+DELETE {{server}}/odata/v4/pocreation/Companies/Companies-3171774
+Content-Type: application/json
+{{auth}}
+
+
+### Materials
+# @name Materials_GET
+GET {{server}}/odata/v4/pocreation/Materials
+{{auth}}
+
+
+### Materials
+# @name Materials_POST
+POST {{server}}/odata/v4/pocreation/Materials
+Content-Type: application/json
+{{auth}}
+
+{
+  "code": "Materials-13467951",
+  "name": "name-13467951",
+  "desc": "desc-13467951",
+  "plantCode": "plantCode-13467951",
+  "price": 0.11369929,
+  "to_Plants": {
+    "code": "Plants-21553600"
+  }
+}
+
+
+### Materials
+# @name Materials_PATCH
+PATCH {{server}}/odata/v4/pocreation/Materials/Materials-13467951
+Content-Type: application/json
+{{auth}}
+
+{
+  "code": "Materials-13467951",
+  "name": "name-13467951",
+  "desc": "desc-13467951",
+  "plantCode": "plantCode-13467951",
+  "price": 0.11369929,
+  "to_Plants": {
+    "code": "Plants-21553600"
+  }
+}
+
+
+### Materials
+# @name Materials_DELETE
+DELETE {{server}}/odata/v4/pocreation/Materials/Materials-13467951
+Content-Type: application/json
+{{auth}}
+
+
+### Statuses
+# @name Statuses_GET
+GET {{server}}/odata/v4/pocreation/Statuses
+{{auth}}
+
+
+### Statuses
+# @name Statuses_POST
+POST {{server}}/odata/v4/pocreation/Statuses
+Content-Type: application/json
+{{auth}}
+
+{
+  "code": 3895276,
+  "desc": "desc-3895276"
+}
+
+
+### Statuses
+# @name Statuses_PATCH
+PATCH {{server}}/odata/v4/pocreation/Statuses/3895276
+Content-Type: application/json
+{{auth}}
+
+{
+  "code": 3895276,
+  "desc": "desc-3895276"
+}
+
+
+### Statuses
+# @name Statuses_DELETE
+DELETE {{server}}/odata/v4/pocreation/Statuses/3895276
+Content-Type: application/json
+{{auth}}

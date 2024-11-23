@@ -1,0 +1,346 @@
+@server = http://localhost:4004
+@auth = Authorization: Basic alice:
+
+
+### POHeader
+# @name POHeader_GET
+GET {{server}}/odata/v4/pobase/POHeader
+{{auth}}
+
+
+### POHeader
+# @name POHeader_POST
+POST {{server}}/odata/v4/pobase/POHeader
+Content-Type: application/json
+{{auth}}
+
+{
+  "ID": "3184216e-3888-4115-9e0c-782adea13bca",
+  "poNumber": 32,
+  "deliveryDate": "2009-06-11",
+  "status": 27,
+  "madeBy": "madeBy.1w8yg@example.org",
+  "remarks": "remarks-3184216",
+  "plantCode": "plantCode-3184216",
+  "companyCode": "companyCode-3184216",
+  "criticality": 66,
+  "totalAmount": 49.19,
+  "to_Plants": {
+    "code": "PlantMaster-20386729"
+  },
+  "to_Companies": {
+    "code": "ompanyMaster-7633727"
+  },
+  "to_Statuses": {
+    "code": 24401088
+  },
+  "to_POItems": [
+    {
+      "ID": "25541769-e0d7-4bd6-8bd6-d208cc143044",
+      "poNumber": 63,
+      "poItemNo": 7,
+      "materialCode": "aterialCode-25541769",
+      "quantity": 87,
+      "amount": 78.35,
+      "to_Materials": {
+        "code": "rial_Master-20075277"
+      }
+    },
+    {
+      "ID": "25541770-2d9a-48b8-9b19-dd8281eb1ffe",
+      "poNumber": 42,
+      "poItemNo": 69,
+      "materialCode": "aterialCode-25541770",
+      "quantity": 56,
+      "amount": 96.19,
+      "to_Materials": {
+        "code": "rial_Master-20075277"
+      }
+    }
+  ],
+  "createdAt": "2003-06-03T00:00:00.000Z",
+  "createdBy": "createdBy.1w8yg@example.com",
+  "modifiedAt": "2000-02-09T00:00:00.000Z",
+  "modifiedBy": "modifiedBy.1w8yg@example.net"
+}
+
+
+### POHeader
+# @name POHeader_PATCH
+PATCH {{server}}/odata/v4/pobase/POHeader/3184216e-3888-4115-9e0c-782adea13bca
+Content-Type: application/json
+{{auth}}
+
+{
+  "ID": "3184216e-3888-4115-9e0c-782adea13bca",
+  "poNumber": 32,
+  "deliveryDate": "2009-06-11",
+  "status": 27,
+  "madeBy": "madeBy.1w8yg@example.org",
+  "remarks": "remarks-3184216",
+  "plantCode": "plantCode-3184216",
+  "companyCode": "companyCode-3184216",
+  "criticality": 66,
+  "totalAmount": 49.19,
+  "to_Plants": {
+    "code": "PlantMaster-20386729"
+  },
+  "to_Companies": {
+    "code": "ompanyMaster-7633727"
+  },
+  "to_Statuses": {
+    "code": 24401088
+  },
+  "to_POItems": [
+    {
+      "ID": "25541769-e0d7-4bd6-8bd6-d208cc143044",
+      "poNumber": 63,
+      "poItemNo": 7,
+      "materialCode": "aterialCode-25541769",
+      "quantity": 87,
+      "amount": 78.35,
+      "to_Materials": {
+        "code": "rial_Master-20075277"
+      }
+    },
+    {
+      "ID": "25541770-2d9a-48b8-9b19-dd8281eb1ffe",
+      "poNumber": 42,
+      "poItemNo": 69,
+      "materialCode": "aterialCode-25541770",
+      "quantity": 56,
+      "amount": 96.19,
+      "to_Materials": {
+        "code": "rial_Master-20075277"
+      }
+    }
+  ],
+  "createdAt": "2003-06-03T00:00:00.000Z",
+  "createdBy": "createdBy.1w8yg@example.com",
+  "modifiedAt": "2000-02-09T00:00:00.000Z",
+  "modifiedBy": "modifiedBy.1w8yg@example.net"
+}
+
+
+### POHeader
+# @name POHeader_DELETE
+DELETE {{server}}/odata/v4/pobase/POHeader/3184216e-3888-4115-9e0c-782adea13bca
+Content-Type: application/json
+{{auth}}
+
+
+### POItem
+# @name POItem_GET
+GET {{server}}/odata/v4/pobase/POItem
+{{auth}}
+
+
+### POItem
+# @name POItem_POST
+POST {{server}}/odata/v4/pobase/POItem
+Content-Type: application/json
+{{auth}}
+
+{
+  "ID": "25541769-e0d7-4bd6-8bd6-d208cc143044",
+  "poNumber": 63,
+  "poItemNo": 7,
+  "materialCode": "aterialCode-25541769",
+  "quantity": 87,
+  "amount": 78.35,
+  "to_Materials": {
+    "code": "rial_Master-20075277"
+  }
+}
+
+
+### POItem
+# @name POItem_PATCH
+PATCH {{server}}/odata/v4/pobase/POItem/25541769-e0d7-4bd6-8bd6-d208cc143044
+Content-Type: application/json
+{{auth}}
+
+{
+  "ID": "25541769-e0d7-4bd6-8bd6-d208cc143044",
+  "poNumber": 63,
+  "poItemNo": 7,
+  "materialCode": "aterialCode-25541769",
+  "quantity": 87,
+  "amount": 78.35,
+  "to_Materials": {
+    "code": "rial_Master-20075277"
+  }
+}
+
+
+### POItem
+# @name POItem_DELETE
+DELETE {{server}}/odata/v4/pobase/POItem/25541769-e0d7-4bd6-8bd6-d208cc143044
+Content-Type: application/json
+{{auth}}
+
+
+### PlantMaster
+# @name PlantMaster_GET
+GET {{server}}/odata/v4/pobase/PlantMaster
+{{auth}}
+
+
+### PlantMaster
+# @name PlantMaster_POST
+POST {{server}}/odata/v4/pobase/PlantMaster
+Content-Type: application/json
+{{auth}}
+
+{
+  "code": "PlantMaster-20386729",
+  "name": "name-20386729",
+  "city": "city-20386729"
+}
+
+
+### PlantMaster
+# @name PlantMaster_PATCH
+PATCH {{server}}/odata/v4/pobase/PlantMaster/PlantMaster-20386729
+Content-Type: application/json
+{{auth}}
+
+{
+  "code": "PlantMaster-20386729",
+  "name": "name-20386729",
+  "city": "city-20386729"
+}
+
+
+### PlantMaster
+# @name PlantMaster_DELETE
+DELETE {{server}}/odata/v4/pobase/PlantMaster/PlantMaster-20386729
+Content-Type: application/json
+{{auth}}
+
+
+### CompanyMaster
+# @name CompanyMaster_GET
+GET {{server}}/odata/v4/pobase/CompanyMaster
+{{auth}}
+
+
+### CompanyMaster
+# @name CompanyMaster_POST
+POST {{server}}/odata/v4/pobase/CompanyMaster
+Content-Type: application/json
+{{auth}}
+
+{
+  "code": "ompanyMaster-7633727",
+  "desc": "desc-7633727",
+  "website": "website-7633727",
+  "name": "name-7633727"
+}
+
+
+### CompanyMaster
+# @name CompanyMaster_PATCH
+PATCH {{server}}/odata/v4/pobase/CompanyMaster/ompanyMaster-7633727
+Content-Type: application/json
+{{auth}}
+
+{
+  "code": "ompanyMaster-7633727",
+  "desc": "desc-7633727",
+  "website": "website-7633727",
+  "name": "name-7633727"
+}
+
+
+### CompanyMaster
+# @name CompanyMaster_DELETE
+DELETE {{server}}/odata/v4/pobase/CompanyMaster/ompanyMaster-7633727
+Content-Type: application/json
+{{auth}}
+
+
+### Material_Master
+# @name Material_Master_GET
+GET {{server}}/odata/v4/pobase/Material_Master
+{{auth}}
+
+
+### Material_Master
+# @name Material_Master_POST
+POST {{server}}/odata/v4/pobase/Material_Master
+Content-Type: application/json
+{{auth}}
+
+{
+  "code": "rial_Master-20075277",
+  "name": "name-20075277",
+  "desc": "desc-20075277",
+  "plantCode": "plantCode-20075277",
+  "price": 4.293973,
+  "to_Plants": {
+    "code": "PlantMaster-20386729"
+  }
+}
+
+
+### Material_Master
+# @name Material_Master_PATCH
+PATCH {{server}}/odata/v4/pobase/Material_Master/rial_Master-20075277
+Content-Type: application/json
+{{auth}}
+
+{
+  "code": "rial_Master-20075277",
+  "name": "name-20075277",
+  "desc": "desc-20075277",
+  "plantCode": "plantCode-20075277",
+  "price": 4.293973,
+  "to_Plants": {
+    "code": "PlantMaster-20386729"
+  }
+}
+
+
+### Material_Master
+# @name Material_Master_DELETE
+DELETE {{server}}/odata/v4/pobase/Material_Master/rial_Master-20075277
+Content-Type: application/json
+{{auth}}
+
+
+### StatusMaster
+# @name StatusMaster_GET
+GET {{server}}/odata/v4/pobase/StatusMaster
+{{auth}}
+
+
+### StatusMaster
+# @name StatusMaster_POST
+POST {{server}}/odata/v4/pobase/StatusMaster
+Content-Type: application/json
+{{auth}}
+
+{
+  "code": 24401088,
+  "desc": "desc-24401088"
+}
+
+
+### StatusMaster
+# @name StatusMaster_PATCH
+PATCH {{server}}/odata/v4/pobase/StatusMaster/24401088
+Content-Type: application/json
+{{auth}}
+
+{
+  "code": 24401088,
+  "desc": "desc-24401088"
+}
+
+
+### StatusMaster
+# @name StatusMaster_DELETE
+DELETE {{server}}/odata/v4/pobase/StatusMaster/24401088
+Content-Type: application/json
+{{auth}}

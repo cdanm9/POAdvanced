@@ -50,7 +50,8 @@
     "redirect-uris": [
       "http://localhost:5000/",
       "https://*.applicationstudio.cloud.sap/**",
-      "https://cdan-po-advanced.cfapps.us10-001.hana.ondemand.com/"
+      "https://cdan-po-advanced.cfapps.us10-001.hana.ondemand.com/",
+      "https://*.us10-001.hana.ondemand.com/**"           
     ]
   }
 }

@@ -62,7 +62,8 @@
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
-        "sap.fe.templates": {}
+        "sap.fe.templates": {},
+        "sap.f": {}
       }
     },
     "contentDensities": {
@@ -94,17 +95,28 @@
       "css": []
     },
     "routing": {
-      "config": {},
+      "config": {
+        "flexibleColumnLayout": {
+          "defaultTwoColumnLayoutType": "TwoColumnsMidExpanded",
+          "defaultThreeColumnLayoutType": "ThreeColumnsEndExpanded"
+        },
+        "routerClass": "sap.f.routing.Router"
+      },
       "routes": [
         {
           "pattern": ":?query:",
           "name": "POHeadersList",
-          "target": "POHeadersList"
+          "target": [
+            "POHeadersList"
+          ]
         },
         {
           "pattern": "POHeaders({key}):?query:",
           "name": "POHeadersObjectPage",
-          "target": "POHeadersObjectPage"
+          "target": [
+            "POHeadersList",
+            "POHeadersObjectPage"
+          ]
         }
       ],
       "targets": {
@@ -129,9 +141,12 @@
                     "type": "ResponsiveTable"
                   }
                 }
-              }
+              },
+              "initialLoad": "Enabled"
             }
-          }
+          },
+          "controlAggregation": "beginColumnPages",
+          "contextPattern": ""
         },
         "POHeadersObjectPage": {
           "type": "Component",
@@ -143,9 +158,17 @@
               "contextPath": "/POHeaders",
               "navigation": {}
             }
-          }
+          },
+          "controlAggregation": "midColumnPages",
+          "contextPattern": "/POHeaders({key})"
         }
       }
+    },
+    "rootView": {
+      "viewName": "sap.fe.templates.RootContainer.view.Fcl",
+      "type": "XML",
+      "async": true,
+      "id": "appRootView"
     }
   },
   "sap.fiori": {

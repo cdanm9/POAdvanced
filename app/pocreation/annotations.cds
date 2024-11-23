@@ -10,29 +10,32 @@ annotate service.POHeaders with @(
         },
         {
             $Type : 'UI.DataField',
-            Value : plantCode,
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : companyCode,
-        },
-        {
-            $Type : 'UI.DataField',
             Value : deliveryDate,
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : status,
         },
         {
             $Type : 'UI.DataField',
             Value : madeBy,
         },
+        {
+            $Type : 'UI.DataField',
+            Value : to_Companies.name,
+            Label : 'Company',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : to_Plants.name,
+            Label : 'Plant',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : to_Statuses.desc,
+            Label : 'Status',
+        },
     ],
     UI.SelectionFields : [
-        plantCode,
-        companyCode,
-        status,
+        to_Plants_code,
+        to_Companies_code,
+        to_Statuses_code,
     ],
     UI.Facets : [
         {
@@ -44,14 +47,33 @@ annotate service.POHeaders with @(
             $Type : 'UI.ReferenceFacet',
             Label : 'PO Items',
             Target : 'to_POItems/@UI.LineItem',
-        },
-        {
-            $Type : 'UI.ReferenceFacet',
-            Label : 'PO Attachments',
-            ID : 'POAttachments',
-            Target : 'to_POAttachments/@UI.LineItem#POAttachments',
-        },
+        } 
     ],
+    UI.FieldGroup #Main : {
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : to_Plants_code,
+                Label : 'Plant',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : to_Companies_code,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : deliveryDate,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : madeBy,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : remarks,
+            },
+        ],
+    },
 );
 
 annotate service.POHeaders with {
@@ -67,7 +89,7 @@ annotate service.POHeaders with {
                     $Type : 'Common.ValueListParameterInOut',
                     LocalDataProperty : plantCode,
                     ValueListProperty : 'code',
-                },
+                },    
                 {
                     $Type : 'Common.ValueListParameterDisplayOnly',
                     ValueListProperty : 'name',
@@ -139,7 +161,11 @@ annotate service.POHeaders with {
             ],
             Label : 'Status',
         },
-        Common.ValueListWithFixedValues : true
+        Common.ValueListWithFixedValues : true,
+        Common.Text : {
+            $value : to_Statuses.desc,
+            ![@UI.TextArrangement] : #TextFirst
+        },
 )};
 
 annotate service.Statuses with {
@@ -168,21 +194,6 @@ annotate service.POItems with @(
     ]
 );
 
-annotate service.POAttachments with @(
-    UI.LineItem #POAttachments : [
-        {
-            $Type : 'UI.DataField',
-            Value : poNumber,
-            Label : 'PO Number',
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : content,
-            Label : 'File',
-        },
-    ]
-);
-
 annotate service.POHeaders with {
     remarks @UI.MultiLineText : true
 };
@@ -207,11 +218,12 @@ annotate service.POItems with {
                 },
                 {
                     $Type : 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty : 'plantCode',
+                    ValueListProperty : 'price',
                 },
                 {
-                    $Type : 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty : 'price',
+                    $Type : 'Common.ValueListParameterInOut',
+                    ValueListProperty : 'plantCode',
+                    LocalDataProperty : to_Materials.code,
                 },
             ],
             Label : 'Materials',
@@ -221,5 +233,91 @@ annotate service.POItems with {
 
 annotate service.Materials with {
     code @Common.Text : name
+};
+
+
+annotate service.Plants with {
+    name @Common.Text : code
+};
+
+annotate service.POHeaders with {
+    to_Plants @(
+        Common.Label : 'Plants',
+        Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'Plants',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : to_Plants_code,
+                    ValueListProperty : 'code',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'name',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'city',
+                },
+            ],
+            Label : 'Plants',
+        },
+        Common.ValueListWithFixedValues : false,
+    )
+};
+
+annotate service.POHeaders with {
+    to_Companies @(
+        Common.Label : 'Company ',
+        Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'Companies',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : to_Companies_code,
+                    ValueListProperty : 'code',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'name',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'desc',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'website',
+                },
+            ],
+            Label : 'Company',
+        },
+        Common.ValueListWithFixedValues : false,
+    )
+};
+
+annotate service.POHeaders with {
+    to_Statuses @(
+        Common.Label : 'Status ',
+        Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'Statuses',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : to_Statuses_code,
+                    ValueListProperty : 'code',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'desc',
+                },
+            ],
+            Label : 'Status',
+        },
+        Common.ValueListWithFixedValues : true,
+    )
 };
 

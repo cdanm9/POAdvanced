@@ -9,5 +9,5 @@ service POAnalyticsService {
      entity Companies as projection on Master.Companies;
      entity Materials as projection on Master.Materials;  
      entity Statuses as projection on Master.Statuses;   
-     entity POAttachments as projection on Transaction.POAttachments; 
+    //  entity POAttachments as projection on Transaction.POAttachments;   
 } 

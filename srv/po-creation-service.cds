@@ -9,7 +9,7 @@ service POCreationService {
      entity Plants as projection on Master.Plants;
      entity Companies as projection on Master.Companies;
      entity Materials as projection on Master.Materials;  
-     entity Statuses as projection on Master.Statuses;   
-     entity POAttachments as projection on Transaction.POAttachments;    
+     entity Statuses as projection on Master.Statuses; 
+     // entity POAttachments as projection on Transaction.POAttachments;      
 
 }  
