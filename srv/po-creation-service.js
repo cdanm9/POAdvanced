@@ -1,6 +1,6 @@
 const cds=require("@sap/cds")
 module.exports=cds.service.impl(function(srv){
-    const { POHeaders, POItems,POAttachments} = this.entities;   
+    const { POHeaders, POItems} = this.entities;   
     this.before('NEW', POHeaders.draft, async req => {
         let aPONumber;
         try{
@@ -71,11 +71,11 @@ module.exports=cds.service.impl(function(srv){
         }
     })
 
-    this.before('CREATE',POAttachments,async req => { 
-    })
+    // this.before('CREATE',POAttachments,async req => { 
+    // })
 
-    this.before('NEW',POAttachments,async req => { 
-    })
+    // this.before('NEW',POAttachments,async req => { 
+    // })
 
     this.on ('error', async (err, req) => {         
     })

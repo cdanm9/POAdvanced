@@ -2,7 +2,7 @@ using com.sap.Transaction as Transaction from '../db/transaction-table';
 using com.sap.Master as Master from '../db/master-table';
 
 
-service PODashboardService@(requires:['authenticated-user']){
+service PODashboardService @(requires:['authenticated-user']){
      @restrict:[{grant:'READ',to:'ZPO_ADMIN'}]
      entity POHeaders as projection on Transaction.POHeaders;     
      entity POItems as projection on Transaction.POItems;

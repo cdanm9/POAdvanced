@@ -178,7 +178,7 @@ annotate POAnalyticsService.POHeaders with @(
 
 
 
-annotate POAnalyticsService.POHeaders with@(
+annotate POAnalyticsService.POHeaders with @(
     UI: {
         SelectionFields  : [
             plantCode,
