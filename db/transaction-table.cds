@@ -18,7 +18,7 @@ context com.sap.Transaction{
     to_Companies: Association to Master.Companies;    
     to_Statuses: Association to Master.Statuses;                                            
     to_POItems: Composition of many POItems on to_POItems.to_POHeaders=$self;                       
-    // to_POAttachments: Composition of many POAttachments on to_POAttachments.to_POHeaders=$self;     
+    to_POAttachments: Composition of many POAttachments on to_POAttachments.to_POHeaders=$self;     
   };              
 
   entity POItems: cuid{         
@@ -34,14 +34,14 @@ context com.sap.Transaction{
     to_POHeaders: Association to POHeaders;    
   }     
 
-  // entity POAttachments: cuid,managed{
-  //   poNumber: Integer64; 
-  //   @Core.IsMediaType: true mimeType:String;
-  //   @Core.MediaType:mimeType content:LargeBinary @Core.ContentDisposition.Filename: name;    
-  //   name: String;
-  //   to_POHeaders: Association to POHeaders; 
-  //   url:String;    
-  // }
+  entity POAttachments: cuid,managed{
+    poNumber: Integer64; 
+    @Core.IsMediaType: true mimeType:String;
+    @Core.MediaType:mimeType content:LargeBinary @Core.ContentDisposition.Filename: name;    
+    name: String;
+    to_POHeaders: Association to POHeaders; 
+    url:String;    
+  }
       
 }
 
