@@ -5,7 +5,7 @@
     {
       "source": "^/odata/(.*)$",
       "target": "/odata/$1",
-      "destination": "POAdvanced",
+      "destination": "srv-api",
       "authenticationType": "xsuaa",
       "csrfProtection": false
     },
@@ -20,11 +20,6 @@
       "target": "/test-resources/$1",
       "authenticationType": "none",
       "destination": "ui5"
-    },
-    {
-      "source": "^/user-api(.*)",
-      "target": "$1",
-      "service": "sap-approuter-userapi"
     },
     {
       "source": "^(.*)$",

@@ -1,19 +1,19 @@
 ## Application Details
 |               |
 | ------------- |
-|**Generation Date and Time**<br>Wed Nov 13 2024 11:39:37 GMT+0000 (Coordinated Universal Time)|
-|**App Generator**<br>@sap/generator-fiori-elements|
-|**App Generator Version**<br>1.15.4|
+|**Generation Date and Time**<br>Tue Nov 18 2025 11:48:43 GMT+0000 (Coordinated Universal Time)|
+|**App Generator**<br>SAP Fiori Application Generator|
+|**App Generator Version**<br>1.19.5|
 |**Generation Platform**<br>SAP Business Application Studio|
 |**Template Used**<br>List Report Page V4|
-|**Service Type**<br>Local Cap|
+|**Service Type**<br>Local CAP|
 |**Service URL**<br>http://localhost:4004/odata/v4/pocreation/|
 |**Module Name**<br>pocreation|
-|**Application Title**<br>Purchase Order Creation|
+|**Application Title**<br>PO Create|
 |**Namespace**<br>com.sap|
 |**UI5 Theme**<br>sap_horizon|
-|**UI5 Version**<br>1.130.0|
-|**Enable Code Assist Libraries**<br>False|
+|**UI5 Version**<br>1.142.1|
+|**Enable Code Assist Libraries**<br>True|
 |**Enable TypeScript**<br>False|
 |**Add Eslint configuration**<br>False|
 |**Main Entity**<br>POHeaders|
@@ -21,11 +21,11 @@
 
 ## pocreation
 
-Purchase Order Creation Application
+PO Creation App
 
 ### Starting the generated app
 
--   This app has been generated using the SAP Fiori tools - App Generator, as part of the SAP Fiori tools suite.  In order to launch the generated app, simply start your CAP project and navigate to the following location in your browser:
+-   This app has been generated using the SAP Fiori tools - App Generator, as part of the SAP Fiori tools suite.  To launch the generated app, start your CAP project:  and navigate to the following location in your browser:
 
 http://localhost:4004/pocreation/webapp/index.html
 
