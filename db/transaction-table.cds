@@ -4,7 +4,7 @@ context com.sap.Transaction{
      
   entity POHeaders: managed,cuid{
     // poNumber: Integer64 not null; 
-    poNumber: Integer64; 
+    poNumber: Integer64 ; 
     deliveryDate: Date;
     status: Integer; 
     @Search.fuzzinessThreshold: 0.7   
@@ -26,6 +26,7 @@ context com.sap.Transaction{
     // poNumber: Integer64 not null;
     poNumber: Integer64;   
     // poItemNo:Integer not null;   
+    @readonly 
     poItemNo:Integer; 
     materialCode: String(20);    
     quantity: Integer @assert.range:[1,100];          
