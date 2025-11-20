@@ -1,6 +1,6 @@
 using com.sap.Transaction as Transaction from '../db/transaction-table';
 using com.sap.Master as Master from '../db/master-table';
-// @protocol: ['odata-v4', 'graphql']     
+@protocol: ['odata-v4', 'graphql']     
 service POTestService {
      @cds.search: {poNumber,madeBy}
      entity POHeaders as projection on Transaction.POHeaders;     

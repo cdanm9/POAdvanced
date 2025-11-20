@@ -14,6 +14,17 @@ annotate POCreationService.POHeaders with{
     to_POItems  @title: 'Purchase Order Items';
 }
 
+annotate POCreationService.Plants with{
+    city @title : 'City';
+    code @title : 'Plant';
+    name @title : 'Name';
+}
+annotate POCreationService.Companies with{
+    website @title : 'Website';
+    code @title : 'Company';
+    name @title : 'Name';
+}
+
 annotate POCreationService.POItems with{
     poItemNo      @title : 'PO Item Number';
     poNumber      @title : 'PO Number';

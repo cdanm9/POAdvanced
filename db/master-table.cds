@@ -3,6 +3,7 @@ context com.sap.Master{
     key code: String(20);     
     name: String(100);
     city: String(100); 
+    to_Companies: Association to Companies; 
     to_Materials: Association to many Materials on to_Materials.plantCode=code;           
   }
 

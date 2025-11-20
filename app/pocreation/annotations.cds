@@ -1,6 +1,8 @@
 using POCreationService as service from '../../srv/po-creation-service';
 using from '../../srv/po-creation-annotations-service';
 
+annotate service.POHeaders with @Common.SemanticKey: [poNumber];
+
 annotate service.POHeaders with {
     to_Plants @(
         Common.ValueList : {
@@ -20,11 +22,18 @@ annotate service.POHeaders with {
                     $Type : 'Common.ValueListParameterDisplayOnly',
                     ValueListProperty : 'city',
                 },
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    ValueListProperty : 'to_Companies_code',
+                    LocalDataProperty : to_Companies_code,
+                },
             ],
             Label : 'Plants',
         },
         Common.Label : 'Plant',
         Common.ValueListWithFixedValues : false,
+        Common.Text : to_Plants.name,
+        Common.Text.@UI.TextArrangement : #TextFirst,
     )
 };
 
@@ -56,6 +65,8 @@ annotate service.POHeaders with {
         },
         Common.Label : 'Company',
         Common.ValueListWithFixedValues : false,
+        Common.Text : to_Companies.desc,
+        Common.Text.@UI.TextArrangement : #TextFirst,
     )
 };
 
@@ -119,6 +130,15 @@ annotate service.POHeaders with @(
         },
         {
             $Type : 'UI.DataField',
+            Value : to_Companies_code,
+            @UI.Importance : #Medium,
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : to_Plants_code,
+        },
+        {
+            $Type : 'UI.DataField',
             Value : deliveryDate,
             @UI.Importance : #High,
         },
@@ -128,20 +148,28 @@ annotate service.POHeaders with @(
             @UI.Importance : #High,
         },
         {
-            $Type : 'UI.DataField',
-            Value : to_Companies_code,
-            @UI.Importance : #Medium,
+            $Type : 'UI.DataFieldForAction',
+            Action : 'POCreationService.POHold',
+            Label : 'PO Hold',
+            Criticality : #Negative,
+        },
+        {
+            $Type : 'UI.DataFieldForAction',
+            Action : 'POCreationService.POApprove',
+            Label : 'PO Approve',
+            Criticality : #Positive,
+        },
+        {
+            $Type : 'UI.DataFieldForAction',
+            Action : 'POCreationService.POReject',
+            Label : 'PO Reject',
+            Criticality :#Critical
         },
         {
             $Type : 'UI.DataField',
             Value : to_Statuses_code,
             Criticality : to_Statuses_code,
             @UI.Importance : #High,
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : to_Plants.name,
-            Label : 'Plants',
         },
     ],
     UI.PresentationVariant #vh_POHeaders_poNumber : {
@@ -158,6 +186,14 @@ annotate service.POHeaders with @(
         Data : [
             {
                 $Type : 'UI.DataField',
+                Value : to_Plants_code,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : to_Companies_code,
+            },
+            {
+                $Type : 'UI.DataField',
                 Value : deliveryDate,
             },
             {
@@ -167,14 +203,6 @@ annotate service.POHeaders with @(
             {
                 $Type : 'UI.DataField',
                 Value : remarks,
-            },
-            {
-                $Type : 'UI.DataField',
-                Value : to_Plants_code,
-            },
-            {
-                $Type : 'UI.DataField',
-                Value : to_Companies_code,
             },
         ],
     },
@@ -187,7 +215,7 @@ annotate service.POHeaders with @(
         {
             $Type : 'UI.ReferenceFacet',
             Label : 'PO Items',
-            Target : 'to_POItems/@UI.LineItem',
+            Target : 'to_POItems/@UI.SelectionPresentationVariant#table',
         },
         {
             $Type : 'UI.ReferenceFacet',
@@ -206,6 +234,51 @@ annotate service.POHeaders with @(
         Description : {
             $Type : 'UI.DataField',
             Value : poNumber,
+        },
+    },
+    UI.Identification : [
+        {
+            $Type : 'UI.DataFieldForAction',
+            Action : 'POCreationService.POHold',
+            Label : 'PO Hold',
+            Inline: true,
+            @UI.Importance : #High,
+        },
+        {
+            $Type : 'UI.DataFieldForAction',
+            Action : 'POCreationService.POApprove',
+            Label : 'PO Approve',
+            Criticality : #Positive,
+            Inline: true
+        },
+        {
+            $Type : 'UI.DataFieldForAction',
+            Action : 'POCreationService.POReject',
+            Label : 'PO Reject',
+            Criticality : #Negative,
+            Inline: true
+        },
+        
+    ],
+    UI.SelectionPresentationVariant #table : {
+        $Type : 'UI.SelectionPresentationVariantType',
+        PresentationVariant : {
+            $Type : 'UI.PresentationVariantType',
+            Visualizations : [
+                '@UI.LineItem',
+            ],
+            SortOrder : [
+                {
+                    $Type : 'Common.SortOrderType',
+                    Property : poNumber,
+                    Descending : true,
+                },
+            ],
+        },
+        SelectionVariant : {
+            $Type : 'UI.SelectionVariantType',
+            SelectOptions : [
+            ],
         },
     },
 );
@@ -228,7 +301,28 @@ annotate service.POItems with @(
             $Type : 'UI.DataField',
             Value : amount,
         },
-    ]
+    ],
+    UI.SelectionPresentationVariant #table : {
+        $Type : 'UI.SelectionPresentationVariantType',
+        PresentationVariant : {
+            $Type : 'UI.PresentationVariantType',
+            Visualizations : [
+                '@UI.LineItem',
+            ],
+            SortOrder : [
+                {
+                    $Type : 'Common.SortOrderType',
+                    Property : poItemNo,
+                    Descending : false,
+                },
+            ],
+        },
+        SelectionVariant : {
+            $Type : 'UI.SelectionVariantType',
+            SelectOptions : [
+            ],
+        },
+    },
 );
 
 annotate service.POHeaders with {
@@ -310,4 +404,8 @@ annotate service.POAttachments with @(
         },
     ]
 );
+
+annotate service.POHeaders with {
+    remarks @UI.MultiLineText : true
+};
 
