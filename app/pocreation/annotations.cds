@@ -26,6 +26,7 @@ annotate service.POHeaders with {
                     $Type : 'Common.ValueListParameterInOut',
                     ValueListProperty : 'to_Companies_code',
                     LocalDataProperty : to_Companies_code,
+                    Label:'Company'
                 },
             ],
             Label : 'Plants',
@@ -132,6 +133,7 @@ annotate service.POHeaders with @(
             $Type : 'UI.DataField',
             Value : to_Companies_code,
             @UI.Importance : #Medium,
+            Label:'Company'
         },
         {
             $Type : 'UI.DataField',
@@ -191,6 +193,7 @@ annotate service.POHeaders with @(
             {
                 $Type : 'UI.DataField',
                 Value : to_Companies_code,
+                Label : 'Company',
             },
             {
                 $Type : 'UI.DataField',
@@ -345,7 +348,7 @@ annotate service.POHeaders with {
 annotate service.Companies with {
     code @(
         Common.Text : desc,
-        Common.Text.@UI.TextArrangement : #TextLast,
+        Common.Text.@UI.TextArrangement : #TextFirst,
 )};
 
 annotate service.POHeaders with {
@@ -380,9 +383,10 @@ annotate service.Plants with @(
 );
 
 annotate service.Plants with {
+    to_Companies @Common.Text : 'Company';
     code @(
         Common.Text : name,
-        Common.Text.@UI.TextArrangement : #TextLast,
+        Common.Text.@UI.TextArrangement : #TextFirst,
 )};
 
 annotate service.POAttachments with @(

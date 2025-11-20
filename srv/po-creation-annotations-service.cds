@@ -15,6 +15,7 @@ annotate POCreationService.POHeaders with{
 }
 
 annotate POCreationService.Plants with{
+    to_Companies @Common.Text : 'Company';
     city @title : 'City';
     code @title : 'Plant';
     name @title : 'Name';
