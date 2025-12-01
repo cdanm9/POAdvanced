@@ -2,7 +2,7 @@ const cds=require("@sap/cds")
 // module.exports=cds.service.impl(function(srv){
 
 module.exports= class POCreationService extends cds.ApplicationService { async init() {
-    const { POHeaders, POItems,POAttachments} = this.entities;   
+    const { POHeaders, POItems,POAttachments,TrialEvents} = this.entities;   
     this.before('NEW', POHeaders.drafts, async req => {
         req.data.to_Statuses_code=0;          
     })
@@ -11,6 +11,8 @@ module.exports= class POCreationService extends cds.ApplicationService { async i
         let { maxPoNumber } = await SELECT.one (`max(poNumber) as maxPoNumber`) .from (POHeaders);
         req.data.poNumber = (maxPoNumber == null) ? 100001 : ++maxPoNumber;
         req.data.to_Statuses_code=5; 
+        let{ poNumber, to_Statuses_code, msg = "Success" } = req.data;
+        this.emit('POStatusesCheck',{poNumber,status:to_Statuses_code,msg})
     });
 
     this.before('SAVE', POHeaders, async req => {
@@ -54,6 +56,9 @@ module.exports= class POCreationService extends cds.ApplicationService { async i
 
     this.on ('POHold',async req => {
         await UPDATE (req.subject) .with ({Status:2,Criticality:2})
+    })
+    this.on ('POStatusesCheck',async req => {
+        await INSERT(req.data) .into(TrialEvents)
     })
 
     this.on ('error', async (err, req) => { 

@@ -20,11 +20,18 @@ service POCreationService {
           action POReject();   
           action POHold();    
      };    
+
+     event POStatusesCheck{
+          poNumber:Integer64;
+          status:Integer;
+          msg:String(1000); 
+     }
      entity POItems as projection on Transaction.POItems;
      entity Plants as projection on Master.Plants;
      entity Companies as projection on Master.Companies;
      entity Materials as projection on Master.Materials;  
      entity Statuses as projection on Master.Statuses; 
      entity POAttachments as projection on Transaction.POAttachments;      
+     entity TrialEvents as projection on Transaction.TrialEvents;      
 
 }  

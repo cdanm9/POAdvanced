@@ -40,6 +40,9 @@
       "bypass_draft": true,
       "preview": true
     },
+    "messaging":{
+      "kind":"enterprise-messaging"
+    },
     "requires": {
       "db": "hana",
       "auth": "xsuaa",

@@ -44,6 +44,13 @@ context com.sap.Transaction{
     to_POHeaders: Association to POHeaders; 
     url:String;    
   }
+
+  entity TrialEvents:cuid{
+    poNumber:Integer64;
+    status:Integer;
+    msg:String(1000)
+
+  }
       
 }
 
