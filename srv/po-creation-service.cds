@@ -2,6 +2,15 @@ using com.sap.Transaction as Transaction from '../db/transaction-table';
 using com.sap.Master as Master from '../db/master-table';
 
 service POCreationService {
+
+     @Capabilities : {
+          FilterRestrictions : {
+               FilterExpressionRestrictions :[{
+                    Property : 'deliveryDate',
+                    AllowedExpressions : 'SingleRange'
+               }]
+          }
+     }
      @odata.draft.enabled
      @odata.draft.bypass
      entity POHeaders as projection on Transaction.POHeaders{

@@ -5,6 +5,7 @@ context com.sap.Transaction{
   entity POHeaders: managed,cuid{
     // poNumber: Integer64 not null; 
     poNumber: Integer64 ; 
+    // deliveryDate: Date @assert.range: [ createdAt, '2025-12-31'];
     deliveryDate: Date;
     status: Integer; 
     @Search.fuzzinessThreshold: 0.7   

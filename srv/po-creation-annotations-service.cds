@@ -12,6 +12,10 @@ annotate POCreationService.POHeaders with{
     to_Companies       @title: 'Company Master';
     to_Statuses        @title : 'Status Master';
     to_POItems  @title: 'Purchase Order Items';
+    // criticality @(  title: 'Criticality',
+    //     Common : {
+    //     ValueListWithFixedValues.@Common.ValueListShowValuesImmediately,
+    // })
 }
 
 annotate POCreationService.Plants with{

@@ -37,14 +37,11 @@
       "index": true
     },
     "fiori": {
-      "preview": true,
-      "bypass_draft": true
+      "bypass_draft": true,
+      "preview": true
     },
     "requires": {
       "db": "hana",
-      "[hybrid]": {
-        "auth": "xsuaa"
-      },
       "auth": "xsuaa",
       "destinations": true,
       "connectivity": true,
@@ -79,9 +76,6 @@
           "model": "db/postgres"
         }
       }
-    },
-    "hana": {
-      "deploy-format": "hdbtable"
     }
   },
   "sapux": [

@@ -25,11 +25,11 @@ annotate service.POHeaders with {
                 {
                     $Type : 'Common.ValueListParameterInOut',
                     ValueListProperty : 'to_Companies_code',
-                    LocalDataProperty : to_Companies_code,
-                    Label:'Company'
+                    LocalDataProperty : to_Companies_code
                 },
             ],
             Label : 'Plants',
+            PresentationVariantQualifier : 'vh_POHeaders_to_Plants',
         },
         Common.Label : 'Plant',
         Common.ValueListWithFixedValues : false,
@@ -57,12 +57,9 @@ annotate service.POHeaders with {
                     $Type : 'Common.ValueListParameterDisplayOnly',
                     ValueListProperty : 'website',
                 },
-                {
-                    $Type : 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty : 'name',
-                },
             ],
             Label : 'Company',
+            PresentationVariantQualifier : 'vh_POHeaders_to_Companies',
         },
         Common.Label : 'Company',
         Common.ValueListWithFixedValues : false,
@@ -122,6 +119,8 @@ annotate service.POHeaders with @(
         to_Companies_code,
         to_Plants_code,
         to_Statuses_code,
+        criticality,
+        deliveryDate,
     ],
     UI.LineItem : [
         {
@@ -291,6 +290,7 @@ annotate service.POItems with @(
         {
             $Type : 'UI.DataField',
             Value : poItemNo,
+            Label : 'Sr No',
         },
         {
             $Type : 'UI.DataField',
@@ -379,15 +379,49 @@ annotate service.Plants with @(
                 Descending : false,
             },
         ],
-    }
+    },
+    UI.PresentationVariant #vh_POHeaders_to_Plants : {
+        $Type : 'UI.PresentationVariantType',
+        SortOrder : [
+            {
+                $Type : 'Common.SortOrderType',
+                Property : name,
+                Descending : false,
+            },
+        ],
+    },
 );
 
 annotate service.Plants with {
-    to_Companies @Common.Text : 'Company';
+    // to_Companies. @Common.Text : 'Company';
+    // to_Companies @Common.Text : 'Company';
     code @(
         Common.Text : name,
         Common.Text.@UI.TextArrangement : #TextFirst,
 )};
+
+annotate service.Plants with @(
+     UI.LineItem: [
+        {
+            $Type : 'UI.DataField',
+            Value : to_Companies_code,
+            Label:'Company'
+        }
+    ]
+);
+
+// annotate service.Plants with @(
+
+// );
+
+annotate service.Plants with{
+    to_Companies_code @Common.Text : 'Company';
+}
+
+annotate service.POHeaders with{
+    to_Companies_code @Common.Text : 'Company';
+}
+
 
 annotate service.POAttachments with @(
     UI.LineItem #POAttachments : [
@@ -412,4 +446,73 @@ annotate service.POAttachments with @(
 annotate service.POHeaders with {
     remarks @UI.MultiLineText : true
 };
+
+annotate service.Statuses with {
+    code @(
+        Common.Text : desc,
+        Common.Text.@UI.TextArrangement : #TextOnly,
+)};
+
+annotate service.Companies with @(
+    UI.PresentationVariant #vh_POHeaders_to_Companies : {
+        $Type : 'UI.PresentationVariantType',
+        SortOrder : [
+            {
+                $Type : 'Common.SortOrderType',
+                Property : code,
+                Descending : false,
+            },
+        ],
+    }
+);
+
+annotate service.POHeaders with {
+    // criticality @Common.ValueList : {
+    //     $Type : 'Common.ValueListType',
+    //     CollectionPath : 'Statuses',
+    //     ValueListWithFixedValues: true,  
+    //     // Search-Term: #RadioButtons | Render Value help with radio buttons
+    //     ValueListWithFixedValues.@Common.ValueListShowValuesImmediately,
+    //     Parameters : [
+    //         {
+    //             $Type : 'Common.ValueListParameterInOut',
+    //             LocalDataProperty : criticality,
+    //             ValueListProperty : 'code',
+    //         },
+    //     ],
+    //     Label : 'Criticality'
+    // }
+
+
+    criticality @(Common : {
+        Label : 'Criticality',
+        ValueListWithFixedValues: false,
+        // Search-Term: #RadioButtons | Render Value help with radio buttons
+        ValueListWithFixedValues.@Common.ValueListShowValuesImmediately,
+        ValueList       : {
+            Label          : 'Criticality',
+            CollectionPath : 'Statuses',
+            Parameters     : [
+                {
+                    $Type               : 'Common.ValueListParameterInOut',
+                    ValueListProperty   : 'code',
+                    LocalDataProperty   : criticality
+                },
+            ]
+        }
+    });
+};
+
+annotate service.Statuses with @(
+    UI.PresentationVariant #vh_POHeaders_criticality : {
+        $Type : 'UI.PresentationVariantType',
+        SortOrder : [
+            {
+                $Type : 'Common.SortOrderType',
+                Property : code,
+                Descending : false,
+            },
+        ],
+    }
+);
 

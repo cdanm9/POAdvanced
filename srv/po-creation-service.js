@@ -16,6 +16,9 @@ module.exports= class POCreationService extends cds.ApplicationService { async i
     this.before('SAVE', POHeaders, async req => {
         
     })
+    this.after('SAVE', POHeaders.drafts, async req => {
+        
+    })
         
     this.before('NEW', POItems.drafts, async req => {
         let { maxPoItemNo } = await SELECT.one(`max(poItemNo) as maxPoItemNo`).from(POItems.drafts).where({to_POHeaders_ID:req.data.to_POHeaders_ID});
