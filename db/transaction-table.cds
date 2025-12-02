@@ -29,8 +29,12 @@ context com.sap.Transaction{
     // poItemNo:Integer not null;   
     @readonly 
     poItemNo:Integer; 
-    materialCode: String(20);    
-    quantity: Integer @assert.range:[1,100];          
+    materialCode: String(20);   
+
+    // @assert.range: {
+    //   $value: [1,100], message: 'Quantity must not exceed 100'
+    // } 
+    quantity: Integer @assert.range:[(0),100] @assert.range.message: 'Please Enter Quantity Between 1 to 100';          
     amount: Decimal; 
     to_Materials: Association to Master.Materials;         
     to_POHeaders: Association to POHeaders;    
