@@ -57,7 +57,7 @@ module.exports= class POCreationService extends cds.ApplicationService { async i
     this.on ('POHold',async (req,next) => {
         await UPDATE (req.subject) .with ({Status:2,Criticality:2})
     })
-    this.on ('POStatusesCheck',async (req,next) => {
+    this.on ('POStatusesCheck',async (req) => {
         await INSERT(req.data) .into(TrialEvents)
     })
 
