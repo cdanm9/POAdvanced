@@ -18,7 +18,7 @@ module.exports= class POCreationService extends cds.ApplicationService { async i
     this.before('SAVE', POHeaders, async req => {
         
     })
-    this.after('SAVE', POHeaders.drafts, async req => {
+    this.after('SAVE', POHeaders.drafts, async (results,req)=> {
         
     })
         
@@ -46,22 +46,22 @@ module.exports= class POCreationService extends cds.ApplicationService { async i
     })
 
 
-    this.on ('POApprove',async req => {
+    this.on ('POApprove',async (req,next) => {
         await UPDATE (req.subject) .with ({Status:3,Criticality:3})      
     })
     
-    this.on ('POReject',async req => {
+    this.on ('POReject',async (req,next) => {
         await UPDATE (req.subject) .with ({Status:1,Criticality:1})
     })
 
-    this.on ('POHold',async req => {
+    this.on ('POHold',async (req,next) => {
         await UPDATE (req.subject) .with ({Status:2,Criticality:2})
     })
-    this.on ('POStatusesCheck',async req => {
+    this.on ('POStatusesCheck',async (req,next) => {
         await INSERT(req.data) .into(TrialEvents)
     })
 
-    this.on ('error', async (err, req) => { 
+    this.on ('error', async (req, next) => { 
         try{
 
         }catch(error){
