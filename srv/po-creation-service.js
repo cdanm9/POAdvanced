@@ -61,7 +61,7 @@ module.exports= class POCreationService extends cds.ApplicationService { async i
         await INSERT(req.data) .into(TrialEvents)
     })
 
-    this.on ('error', async (req, next) => { 
+    this.on ('error', async (err, req) => { 
         try{
 
         }catch(error){
