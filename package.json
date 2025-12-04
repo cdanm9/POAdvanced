@@ -38,15 +38,6 @@
     "test-cap": "node --test test/*.test.js"
   },
   "cds": {
-    "log": {
-      "levels": {
-        "deploy": "silent",
-        "odata": "silent",
-        "cds": "silent",
-        "cds.serve":"silent"
-      }
-
-    },
     "[production]": {
       "db": "hana"
     },
