@@ -2,7 +2,7 @@
   "name": "POAdvanced",
   "version": "1.0.0",
   "description": "Purchase Order",
-  "repository": "PurchaseOrderAdvanced",
+  "repository": "POAdvanced",
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
@@ -22,20 +22,34 @@
     "cds-plugin-ui5": "^0.13.0",
     "mbt": "^1.2.29",
     "rimraf": "^6.1.0",
-    "@cap-js/cds-test": "^0"
+    "@cap-js/cds-test": "^0.4.1"
   },
   "scripts": {
     "start": "cds-serve",
     "watch-hybrid": "cds watch --profile hybrid",
+    "watch-hybrid-bindings": "cds watch --profile hybrid --resolve-bindings",
     "watch-apps": "cds bind --exec -- npm start --prefix app/router",
     "undeploy": "cf undeploy POAdvanced --delete-services --delete-service-keys --delete-service-brokers",
     "build": "rimraf resources mta_archives && mbt build --mtar archive",
     "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
     "build-deploy": "mbt build && cf deploy mta_archives/POAdvanced_1.0.0.mtar",
     "watch-pocreation": "cds watch --open com.sap.pocreation/index.html?sap-ui-xx-viewCache=false --livereload false",
-    "test": "node --test"
+    "test": "node --test",
+    "test-cap": "node --test test/*.test.js"
   },
   "cds": {
+    "log": {
+      "levels": {
+        "deploy": "silent",
+        "odata": "silent",
+        "cds": "silent",
+        "cds.serve":"silent"
+      }
+
+    },
+    "[production]": {
+      "db": "hana"
+    },
     "server": {
       "index": true
     },

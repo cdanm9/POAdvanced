@@ -11,8 +11,8 @@ module.exports= class POCreationService extends cds.ApplicationService { async i
         let { maxPoNumber } = await SELECT.one (`max(poNumber) as maxPoNumber`) .from (POHeaders);
         req.data.poNumber = (maxPoNumber == null) ? 100001 : ++maxPoNumber;
         req.data.to_Statuses_code=5; 
-        let{ poNumber, to_Statuses_code, msg = "Success" } = req.data;
-        this.emit('POStatusesCheck',{poNumber,status:to_Statuses_code,msg})
+        let{ poNumber, to_Statuses_code: status, msg = "Success" } = req.data;
+        this.emit('POStatusesCheck',{poNumber,status,msg})
     });
 
     this.before('SAVE', POHeaders, async req => {
