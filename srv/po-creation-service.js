@@ -1,8 +1,10 @@
-const cds=require("@sap/cds")
+const cds=require("@sap/cds");
+const { SELECT } = require("@sap/cds/lib/ql/cds-ql");
 // module.exports=cds.service.impl(function(srv){
 
 module.exports= class POCreationService extends cds.ApplicationService { async init() {
-    const { POHeaders, POItems,POAttachments,TrialEvents} = this.entities;   
+    const db=cds.connect.to('db')
+    const { POHeaders, POItems,POAttachments,POEvents} = this.entities;   
     this.before('NEW', POHeaders.drafts, async req => {
         req.data.to_Statuses_code=0;          
     })
@@ -11,8 +13,8 @@ module.exports= class POCreationService extends cds.ApplicationService { async i
         let { maxPoNumber } = await SELECT.one (`max(poNumber) as maxPoNumber`) .from (POHeaders);
         req.data.poNumber = (maxPoNumber == null) ? 100001 : ++maxPoNumber;
         req.data.to_Statuses_code=5; 
-        let{ poNumber, to_Statuses_code: status, msg = "Success" } = req.data;
-        this.emit('POStatusesCheck',{poNumber,status,msg})
+        let{ poNumber, to_Statuses_code: status, msg = "PO Created Successfully" } = req.data;
+        this.emit('POAddEvent',{poNumber,status,msg})
     });
 
     this.before('SAVE', POHeaders, async req => {
@@ -47,18 +49,38 @@ module.exports= class POCreationService extends cds.ApplicationService { async i
 
 
     this.on ('POApprove',async (req,next) => {
-        await UPDATE (req.subject) .with ({Status:3,Criticality:3})      
+        let{ poNumber, status=3, msg = "PO Approved Successfully" 
+        } = await SELECT .one .from(POHeaders) .where(req?.params[0])
+        this.emit('POAddEvent',{poNumber,status,msg})
+        await UPDATE (req.subject) .with ({to_Statuses_code:3,Criticality:3})    
+       
     })
     
     this.on ('POReject',async (req,next) => {
-        await UPDATE (req.subject) .with ({Status:1,Criticality:1})
+
+        let{ poNumber, status=1, msg = "PO Rejected Successfully" 
+        } = await SELECT .one .from(POHeaders) .where(req?.params[0])
+        this.emit('POAddEvent',{poNumber,status,msg})
+        await UPDATE (req.subject) .with ({to_Statuses_code:1,Criticality:1})
     })
 
     this.on ('POHold',async (req,next) => {
-        await UPDATE (req.subject) .with ({Status:2,Criticality:2})
+        let{ poNumber, status=1, msg = "PO Held Successfully" 
+        } = await SELECT .one .from(POHeaders) .where(req?.params[0])
+        this.emit('POAddEvent',{poNumber,status,msg})
+        await UPDATE (req.subject) .with ({to_Statuses_code:2,Criticality:2})
     })
-    this.on ('POStatusesCheck',async (req) => {
-        await INSERT(req.data) .into(TrialEvents)
+    this.on ('POAddEvent',async (req) => {
+        await INSERT(req.data) .into(POEvents)
+    })
+
+    this.after('POAddEvent/#succeeded', (data, req) => {
+        // `data` is the result of the event processor
+        console.log('Events Addition Successful', data)
+    })
+    this.after('POAddEvent/#failed', (data, req) => {
+        // `data` is the result of the event processor
+        console.log('Events Addition Failed', data)
     })
 
     this.on ('error', (err, req) => { 
@@ -67,6 +89,13 @@ module.exports= class POCreationService extends cds.ApplicationService { async i
         }catch(error){
 
         }        
+    })
+
+    let job=PO Event cds.spawn ({ every: 60000  }, async ()=>{
+    })
+
+    job.on('succeeded', (req)=>{
+        console.log('succeeded')
     })
 
     return super.init()

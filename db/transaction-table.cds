@@ -49,11 +49,10 @@ context com.sap.Transaction{
     url:String;    
   }
 
-  entity TrialEvents:cuid{
+  entity POEvents:cuid,managed{
     poNumber:Integer64;
     status:Integer;
     msg:String(1000)
-
   }
       
 }

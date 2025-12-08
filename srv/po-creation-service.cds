@@ -21,7 +21,7 @@ service POCreationService {
           action POHold();    
      };    
 
-     event POStatusesCheck{
+     event POAddEvent{
           poNumber:Integer64;
           status:Integer;
           msg:String(1000); 
@@ -32,6 +32,6 @@ service POCreationService {
      entity Materials as projection on Master.Materials;  
      entity Statuses as projection on Master.Statuses; 
      entity POAttachments as projection on Transaction.POAttachments;      
-     entity TrialEvents as projection on Transaction.TrialEvents;      
+     entity POEvents as projection on Transaction.POEvents;      
 
 }  
