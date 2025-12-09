@@ -20,18 +20,17 @@ service POCreationService {
           action POReject();   
           action POHold();    
      };    
-
-     event POAddEvent{
-          poNumber:Integer64;
-          status:Integer;
-          msg:String(1000); 
-     }
      entity POItems as projection on Transaction.POItems;
      entity Plants as projection on Master.Plants;
      entity Companies as projection on Master.Companies;
-     entity Materials as projection on Master.Materials;  
-     entity Statuses as projection on Master.Statuses; 
      entity POAttachments as projection on Transaction.POAttachments;      
-     entity POEvents as projection on Transaction.POEvents;      
+     entity POEvents as projection on Transaction.POEvents;   
+     entity Credentials 
+     @(restrict: [
+          { grant: '*', to: 'SuperAdmin'} 
+     ]) 
+     as projection on Master.Credentials;    
+
+     entity EmailTemplates as projection on Master.EmailTemplates;     
 
 }  

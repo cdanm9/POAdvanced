@@ -54,7 +54,7 @@ context com.sap.Transaction{
     status:Integer;
     msg:String(1000)
   }
-      
+
 }
 
 
