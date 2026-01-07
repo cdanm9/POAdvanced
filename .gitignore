@@ -35,3 +35,4 @@ db/.env
 # auto generated wildcard
 db/.env
 resources/comsappocreation.zip
+app/pocreation/dist/comsappocreation.zip

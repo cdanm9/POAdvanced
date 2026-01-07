@@ -14,7 +14,10 @@
     "@sap/cds": "^9.4.4",
     "@sap/xssec": "^4.11.2",
     "cds-swagger-ui-express": "^0.10.0",
-    "nodemailer": "^7.0.11"
+    "nodemailer": "^7.0.11",
+    "@sap-cloud-sdk/connectivity": "^4.2.0",
+    "@sap-cloud-sdk/http-client": "^4.2.0",
+    "@sap-cloud-sdk/resilience": "^4.2.0"
   },
   "devDependencies": {
     "@cap-js/cds-test": "^0.4.1",
@@ -42,6 +45,10 @@
     "[production]": {
       "db": "hana"
     },
+    "[development]": {
+      "db": "hana",
+      "auth": "mocked"
+    },
     "server": {
       "index": true
     },
@@ -54,7 +61,6 @@
     },
     "requires": {
       "db": "hana",
-      "auth": "xsuaa",
       "destinations": true,
       "connectivity": true,
       "[sqlite]": {
