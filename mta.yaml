@@ -1,16 +1,16 @@
 _schema-version: "3.1"
-ID: POAdvanced
+ID: poadvanced
 description: PO Advanced
 version: 1.0.0
 modules:
-  - name: POAdvanced-srv
+  - name: poadvanced-srv
     type: nodejs
     path: gen/srv
     requires:
-      - name: POAdvanced-db
-      - name: POAdvanced-auth
-      - name: POAdvanced-destination
-      - name: POAdvanced-connectivity
+      - name: poadvanced-db
+      - name: poadvanced-auth
+      - name: poadvanced-destination
+      - name: poadvanced-connectivity
     provides:
       - name: srv-api
         properties:
@@ -21,16 +21,16 @@ modules:
       memory: 1024M
     build-parameters:
       builder: npm
-  - name: POAdvanced-db-deployer
+  - name: poadvanced-db-deployer
     type: hdb
     path: gen/db
     requires:
-      - name: POAdvanced-db
+      - name: poadvanced-db
     parameters:
       buildpack: nodejs_buildpack
       disk-quota: 1024M
       memory: 1024M
-  - name: POAdvanced
+  - name: poadvanced
     type: approuter.nodejs
     path: app/router
     requires:
@@ -40,17 +40,17 @@ modules:
           forwardAuthToken: true
           name: srv-api
           url: ~{srv-url}
-      - name: POAdvanced-auth
-      - name: POAdvanced-destination
+      - name: poadvanced-auth
+      - name: poadvanced-destination
     parameters:
       disk-quota: 256M
       keep-existing-routes: true
       memory: 256M
-  - name: POAdvanced-app-content
+  - name: poadvanced-app-content
     type: com.sap.application.content
     path: .
     requires:
-      - name: POAdvanced-repo-host
+      - name: poadvanced-repo-host
         parameters:
           content-target: true
     build-parameters:
@@ -72,21 +72,21 @@ modules:
       supported-platforms:
         []
 resources:
-  - name: POAdvanced-db
+  - name: poadvanced-db
     type: com.sap.xs.hdi-container
     parameters:
       service: hana
       service-plan: hdi-shared
-  - name: POAdvanced-auth
+  - name: poadvanced-auth
     type: org.cloudfoundry.managed-service
     parameters:
       config:
         tenant-mode: dedicated
-        xsappname: POAdvanced-xsapp
+        xsappname: poadvanced-xsapp
       path: ./xs-security.json
       service: xsuaa
       service-plan: application
-  - name: POAdvanced-destination
+  - name: poadvanced-destination
     type: org.cloudfoundry.managed-service
     parameters:
       config:
@@ -111,16 +111,16 @@ resources:
       service-plan: lite
     requires:
       - name: srv-api
-  - name: POAdvanced-connectivity
+  - name: poadvanced-connectivity
     type: org.cloudfoundry.managed-service
     parameters:
       service: connectivity
       service-plan: lite
-  - name: POAdvanced-repo-host
+  - name: poadvanced-repo-host
     type: org.cloudfoundry.managed-service
     parameters:
       service: html5-apps-repo
-      service-name: POAdvanced-html5-srv
+      service-name: poadvanced-html5-srv
       service-plan: app-host
 parameters:
   deploy_mode: html5-repo

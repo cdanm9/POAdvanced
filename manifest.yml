@@ -1,5 +1,5 @@
 # Generated manifest.yml based on template version 0.1.0
-# appName = POAdvanced
+# appName = poadvanced
 # language=nodejs
 # multitenancy=
 ---
@@ -7,19 +7,19 @@ applications:
 # -----------------------------------------------------------------------------------
 # Backend Service
 # -----------------------------------------------------------------------------------
-- name: POAdvanced-srv
+- name: poadvanced-srv
   random-route: true  # for development only
   path: gen/srv
   memory: 256M
   buildpack: nodejs_buildpack
   services:
-  - POAdvanced-db
-  - POAdvanced-auth
+  - poadvanced-db
+  - poadvanced-auth
 
 # -----------------------------------------------------------------------------------
 # HANA Database Content Deployer App
 # -----------------------------------------------------------------------------------
-- name: POAdvanced-db-deployer
+- name: poadvanced-db-deployer
   path: gen/db
   no-route: true
   health-check-type: process
@@ -27,4 +27,4 @@ applications:
   instances: 1
   buildpack: nodejs_buildpack
   services:
-  - POAdvanced-db
+  - poadvanced-db

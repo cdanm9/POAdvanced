@@ -1,6 +1,4 @@
 {
-  "xsappname": "POAdvanced-xsapp",
-  "tenant-mode": "dedicated",
   "scopes": [
     {
       "name": "uaa.user",
@@ -44,18 +42,5 @@
       ],
       "attribute-references": []
     }
-  ],
-  "oauth2-configuration": {
-    "credential-types": [
-      "instance-secret",
-      "binding-secret",
-      "x509"
-    ],
-    "redirect-uris": [
-      "http://localhost:5000/",
-      "https://*.applicationstudio.cloud.sap/**",
-      "https://cdan-po-advanced.cfapps.us10-001.hana.ondemand.com/",
-      "https://*.us10-001.hana.ondemand.com/**"
-    ]
-  }
+  ]
 }

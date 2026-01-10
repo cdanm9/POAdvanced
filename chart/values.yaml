@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=./values.schema.json
+
+global:
+  domain: c-2ff68de.kyma.ondemand.com
+  imagePullSecret:
+    name: poadvanced-secret
+  image:
+    registry: docker.io
+    tag: latest
+srv:
+  bindings:
+    auth:
+      serviceInstanceName: xsuaa
+    db:
+      serviceInstanceName: hana
+    destination:
+      serviceInstanceName: destination
+  image:
+    repository: cdanm9/poadvanced-srv
+  resources:
+    limits:
+      ephemeral-storage: 1G
+      memory: 500M
+    requests:
+      ephemeral-storage: 1G
+      cpu: 100m
+      memory: 500M
+  health:
+    liveness:
+      path: /health
+    readiness:
+      path: /health
+xsuaa:
+  serviceOfferingName: xsuaa
+  servicePlanName: application
+  parameters:
+    tenant-mode: dedicated
+    oauth2-configuration:
+      redirect-uris:
+        - https://*.{{ tpl .Values.global.domain . }}/**
+    xsappname: poadvanced-{{ .Release.Namespace }}
+hana-deployer:
+  image:
+    repository: cdanm9/poadvanced-hana-deployer
+  bindings:
+    hana:
+      serviceInstanceName: hana
+  resources:
+    limits:
+      cpu: 500m
+      memory: 1G
+    requests:
+      cpu: 100m
+      memory: 256M
+hana:
+  serviceOfferingName: hana
+  servicePlanName: hdi-shared
+destination:
+  serviceOfferingName: destination
+  servicePlanName: lite
+  parameters:
+    version: 1.0.0
