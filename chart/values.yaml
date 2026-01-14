@@ -23,13 +23,15 @@ srv:
       memory: 500M
     requests:
       ephemeral-storage: 1G
-      cpu: 100m
+      cpu: 500m
       memory: 500M
   health:
     liveness:
       path: /health
     readiness:
       path: /health
+  networkSecurity:
+    allowNamespaceInternal: true
 xsuaa:
   serviceOfferingName: xsuaa
   servicePlanName: application
@@ -60,3 +62,32 @@ destination:
   servicePlanName: lite
   parameters:
     version: 1.0.0
+approuter:
+  bindings:
+    auth:
+      serviceInstanceName: xsuaa
+    db:
+      serviceInstanceName: hana
+    destination:
+      serviceInstanceName: destination
+  image:
+    repository: cdanm9/poadvanced-approuter
+  resources:
+    limits:
+      ephemeral-storage: 1G
+      memory: 500M
+    requests:
+      ephemeral-storage: 1G
+      cpu: 100m
+      memory: 256M
+  health:
+    liveness:
+      path: /
+    readiness:
+      path: /
+  envFrom:
+    - configMapRef:
+        name: "{{ .Release.Name }}-approuter-configmap"
+backendDestinations:
+  srv-api:
+    service: srv

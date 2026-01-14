@@ -1,5 +1,6 @@
 using com.sap.Transaction as Transaction from '../db/transaction-table';
 using com.sap.Master as Master from '../db/master-table';
+using kymacap from './external/kymacap';
 @protocol: ['odata-v4', 'graphql']     
 service POTestService {
      @cds.search: {poNumber,madeBy}
@@ -10,4 +11,5 @@ service POTestService {
      entity Materials as projection on Master.Materials;  
      entity Statuses as projection on Master.Statuses;
      entity POAttachments as projection on Transaction.POAttachments;    
+     entity Books as projection on kymacap.Books;    
 } 

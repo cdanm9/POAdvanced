@@ -18,3 +18,11 @@ modules:
         path: gen/db
         env:
           BP_NODE_RUN_SCRIPTS: ""
+  - name: poadvanced-approuter
+    build-parameters:
+      buildpack:
+        type: nodejs
+        builder: builder-jammy-base
+        path: app/router
+        env:
+          BP_NODE_RUN_SCRIPTS: ""

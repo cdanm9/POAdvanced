@@ -93,10 +93,15 @@
       "[production]": {
         "db": "hana",
         "auth": "xsuaa"
+      },
+      "kymacap": {
+        "kind": "odata",
+        "model": "srv/external/kymacap",
+        "credentials": {
+          "destination": "KymaCAP",
+          "path": "/odata/v4/catalog"
+        }
       }
     }
-  },
-  "workspaces": [
-    "app/*"
-  ]
+  }
 }
