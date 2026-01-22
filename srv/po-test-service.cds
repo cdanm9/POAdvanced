@@ -10,6 +10,6 @@ service POTestService {
      entity Companies as projection on Master.Companies;
      entity Materials as projection on Master.Materials;  
      entity Statuses as projection on Master.Statuses;
-     entity POAttachments as projection on Transaction.POAttachments;    
-     entity Books as projection on kymacap.Books;    
+     entity POAttachments as projection on Transaction.POAttachments; 
+     entity Books as projection on kymacap.Books; 
 } 

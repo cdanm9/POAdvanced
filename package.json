@@ -25,8 +25,12 @@
     "@sap/hdi-deploy": "^5.5.1",
     "@sap/ux-specification": "^1.139.0",
     "cds-plugin-ui5": "^0.13.0",
+    "jest": "^30.2.0",
     "mbt": "^1.2.29",
-    "rimraf": "^6.1.0"
+    "rimraf": "^6.1.0",
+    "@sap/eslint-plugin-cds": "^4",
+    "eslint": "^9",
+    "@cap-js/cds-typer": ">=0.1"
   },
   "scripts": {
     "start": "cds-serve",
@@ -39,7 +43,9 @@
     "build-deploy": "mbt build && cf deploy mta_archives/poadvanced_1.0.0.mtar",
     "watch-pocreation": "cds watch --open com.sap.pocreation/index.html?sap-ui-xx-viewCache=false --livereload false",
     "test": "node --test",
-    "test-cap": "node --test test/*.test.js"
+    "test-cap": "node --test test/*.test.js",
+    "jest": "jest test/POCreationService.test.js",
+    "jest-all": "jest --watchAll"
   },
   "cds": {
     "server": {
@@ -103,5 +109,8 @@
         }
       }
     }
+  },
+  "imports": {
+    "#cds-models/*": "./@cds-models/*/index.js"
   }
 }

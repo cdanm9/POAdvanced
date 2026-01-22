@@ -1,5 +1,15 @@
 {
-    "SAP HANA Database Explorer.ShowXsAdvancedConnections": true,
-    "SAP HANA Project Explorer.bind.confirm automatic undeployment": false,
-    "SAP HANA Project Explorer.bind.confirm existing service": false
+  "SAP HANA Database Explorer.ShowXsAdvancedConnections": true,
+  "SAP HANA Project Explorer.bind.confirm automatic undeployment": false,
+  "SAP HANA Project Explorer.bind.confirm existing service": false,
+  "eslint.validate": [
+    "cds",
+    "csn",
+    "csv",
+    "csv (semicolon)",
+    "tsv",
+    "tab",
+    "javascript",
+    "typescript"
+  ]
 }

@@ -62,6 +62,9 @@ destination:
   servicePlanName: lite
   parameters:
     version: 1.0.0
+backendDestinations:
+  srv-api:
+    service: srv
 approuter:
   bindings:
     auth:
@@ -88,6 +91,3 @@ approuter:
   envFrom:
     - configMapRef:
         name: "{{ .Release.Name }}-approuter-configmap"
-backendDestinations:
-  srv-api:
-    service: srv

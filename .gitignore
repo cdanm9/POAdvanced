@@ -36,3 +36,5 @@ db/.env
 db/.env
 resources/comsappocreation.zip
 app/pocreation/dist/comsappocreation.zip
+
+@cds-models
