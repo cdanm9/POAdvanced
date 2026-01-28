@@ -37,6 +37,7 @@
     "build": "rimraf resources mta_archives && mbt build --mtar archive",
     "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
     "build-deploy": "mbt build && cf deploy mta_archives/POAdvanced_1.0.0.mtar",
+    "build-deploy-new": "npm run build && npm run deploy",
     "watch-pocreation": "cds watch --open com.sap.pocreation/index.html?sap-ui-xx-viewCache=false --livereload false",
     "test": "node --test",
     "test-cap": "node --test test/*.test.js"
@@ -95,12 +96,5 @@
         }
       }
     }
-  },
-  "sapux": [
-    "app/pocreation"
-  ],
-  "workspaces": [
-    "app/*",
-    "app/pocreation"
-  ]
+  }
 }
